@@ -1,31 +1,33 @@
 import CustTagTittle from "../atoms/custTagTittle";
 import Image from "next/image";
 import logoPotrait from "../../assets/logoPotrait.jpg";
+import BannerMission from "../molecules/bannerMission";
+import pendiri from "../../assets/pendiri.png";
 
 const About = () => {
   return (
     <div className="cust-container relative pt-20">
-      <CustTagTittle text="Citramas Foundation" />
+      <CustTagTittle text="About" />
       <div className="grid grid-cols-12 py-10">
         <div className="col-span-3 grid place-content-center">
           <Image src={logoPotrait} alt="hero" width={200} />
         </div>
-        <div className="col-span-9 flex flex-col text-sm gap-2">
-          <p>
+        <div className="col-span-6 text-custBlack/80 flex flex-col text-sm gap-2">
+          <p className="text-justify">
             Citramas Foundation is a charitable organization involved in
             ameliorating the conditions of upbringing for children in Indonesia.
             Its field of activity includes financial, medical and educational
-            aspects, as well as any daily minutiae that could impact a child's
+            aspects, as well as any daily minutiae that could impact a child&apos;s
             life.
           </p>
-          <p>
+          <p className="text-justify">
             At its crux, the Citramas Foundation enterprise reflects the dictum
             of its Founder; that the supplication of a strong fundamental,
             whether through medicine or education, is the catalyst for
             maximizing the potential of every child.
           </p>
 
-          <p>
+          <p className="text-justify">
             Founded in 2003 by Mr Kris Taenar Wiluan, Citramas Foundation was
             envisioned as a concomitant entity that would assist acutely
             disadvantaged staff members in the upkeep of their households by
@@ -34,7 +36,7 @@ const About = () => {
             them to the community of Batam Island.
           </p>
 
-          <p>
+          <p className="text-justify">
             More contemporarily, Citramas Foundation has expanded its reach to
             encompass both staff and the community in Batam Island. As well as
             expanding its host of beneficiaries, Citramas Foundation has
@@ -43,7 +45,15 @@ const About = () => {
             children.
           </p>
         </div>
+        <div className="col-span-3 grid gap-3 place-content-center">
+          <Image src={pendiri} alt="hero" width={240} />
+          <div className="flex flex-col items-center w-fit mx-auto">
+            <h2 className="font-semibold text-lg text-custPrimary">Kris Wiluan</h2>
+            <p className="text-custBlack/70">Founder Citramas Group</p>
+          </div>
+        </div>
       </div>
+      <BannerMission />
     </div>
   );
 };

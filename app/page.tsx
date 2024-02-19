@@ -2,6 +2,10 @@ import Image from "next/image";
 import Navbar from "./components/molecules/navbar";
 import Hero from "./components/section/hero";
 import About from "./components/section/about";
+import Activity from "./components/section/activity";
+import News from "./components/section/news";
+import Footer from "./components/section/footer";
+import Map from "./components/section/map";
 
 export default function Home() {
   return (
@@ -9,6 +13,10 @@ export default function Home() {
       <Navbar />
       <Hero />
       <About />
+      <Activity />
+      <News />
+      <Map />
+      <Footer />
     </main>
   );
 }
