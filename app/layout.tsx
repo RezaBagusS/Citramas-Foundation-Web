@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
+import NavbarScroll from "./components/molecules/navbarScroll";
 
 const poppins = Poppins({subsets: ["latin"], weight: ["400", "500", "600", "700"]});
 
@@ -16,7 +17,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${poppins.className} max-w-[1400px] mx-auto`}>{children}</body>
+      <body className={`${poppins.className} max-w-[1400px] mx-auto`}>
+        <NavbarScroll />
+        {children}
+      </body>
     </html>
   );
 }
