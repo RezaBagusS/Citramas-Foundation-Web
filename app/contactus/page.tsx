@@ -1,13 +1,13 @@
-import BannerContact from "../components/section/bannerContact";
+import CustBannerPage from "@/app/components/atoms/custBannerPage"
 import { BsFillTelephoneFill } from "react-icons/bs";
 import { MdAttachEmail } from "react-icons/md";
 import FormContact from "../components/section/formContact";
-import Footer from "../components/section/footer";
+import banner from "@/app/assets/cs-contact.jpg"
 
 const Contactus: React.FC = () => {
   return (
     <div className="w-full relative pt-[69px]">
-      <BannerContact />
+      <CustBannerPage title="Get in touch" desc="We are here to help and answer any question you might have. We look forward to hearing from you." img={banner} />
       <div className="cust-container relative">
         
         {/* LEFT Side */}
