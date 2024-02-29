@@ -88,7 +88,6 @@ const Page: React.FC = () => {
   const searchParams = useSearchParams();
 
   const titleParams = searchParams.get("title");
-  const itemParams = searchParams.get("item");
 
   const handleActive = (title: string) => {
     setIsActive(title);
@@ -103,6 +102,7 @@ const Page: React.FC = () => {
   },[titleParams])
 
   return (
+  
     <div className="w-full relative pt-[69px]">
       <div className="relative drop-shadow-sm">
         <CustBannerPage

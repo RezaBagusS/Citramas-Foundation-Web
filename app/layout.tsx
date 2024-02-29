@@ -2,8 +2,12 @@ import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import NavbarScroll from "./components/molecules/navbarScroll";
+import { Suspense } from "react";
 
-const poppins = Poppins({subsets: ["latin"], weight: ["400", "500", "600", "700"]});
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -19,7 +23,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${poppins.className} max-w-[1400px] mx-auto`}>
         <NavbarScroll />
-        {children}
+        <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
       </body>
     </html>
   );
