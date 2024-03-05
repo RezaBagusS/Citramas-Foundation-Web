@@ -8,7 +8,7 @@ interface CustSettingFieldProps {
   regist?: any
 }
 
-const CustContactField = (({ label, placeholder, type }: CustSettingFieldProps) => {
+const CustContactField = (({ label, placeholder, type, regist }: CustSettingFieldProps) => {
 
   const lowerLabel = label.toLowerCase();
 
@@ -19,6 +19,7 @@ const CustContactField = (({ label, placeholder, type }: CustSettingFieldProps) 
         label == "Message" ? (
             <textarea
                 placeholder={placeholder}
+                {...regist(lowerLabel)}
                 required
                 className="text-sm px-3 py-2 text-custBlack/70 rounded-md border active:outline-none focus:outline-none focus:border-custBlack/70 font-normal"
             />
@@ -26,6 +27,7 @@ const CustContactField = (({ label, placeholder, type }: CustSettingFieldProps) 
             <input
                 type={type}
                 placeholder={placeholder}
+                {...regist(lowerLabel)}
                 required
                 className="text-sm px-3 py-2 text-custBlack/70 rounded-md border active:outline-none focus:outline-none focus:border-custBlack/70 font-normal"
             />

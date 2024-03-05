@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import keywordSearchReducers from "./slices/reduxKeywordSearchSlices";
+import toasterReducers from "./slices/reduxToasterSlices";
 
 const store = configureStore({
     reducer: {
         keywordSearch: keywordSearchReducers,
+        toaster: toasterReducers
     },
     // middleware: [popupFunctionsMiddleware]
 })
