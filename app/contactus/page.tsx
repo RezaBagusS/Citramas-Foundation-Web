@@ -8,10 +8,10 @@ const Contactus: React.FC = () => {
   return (
     <div className="w-full relative pt-[69px]">
       <CustBannerPage title="Get in touch" desc="We are here to help and answer any question you might have. We look forward to hearing from you." img={banner} />
-      <div className="cust-container relative">
+      <div className="cust-container relative -top-10">
         
         {/* LEFT Side */}
-        <div className="w-full grid grid-cols-2 gap-10 justify-between absolute -top-10 pb-10">
+        <div className="w-full grid grid-cols-2 gap-10 justify-between pb-10">
           <div className="flex flex-col gap-5">
             <div className="w-full flex items-center gap-5 p-5 bg-white border drop-shadow-sm">
               <BsFillTelephoneFill className="text-5xl text-custPrimary" />

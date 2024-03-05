@@ -7,7 +7,8 @@ import News from "./components/section/news";
 import Footer from "./components/section/footer";
 import Map from "./components/section/map";
 
-export default function Home() {
+export default async function Home() {
+
   return (
     <main className="relative">
       <Navbar />
@@ -16,7 +17,6 @@ export default function Home() {
       <Activity />
       <News />
       <Map />
-      <Footer />
     </main>
   );
 }

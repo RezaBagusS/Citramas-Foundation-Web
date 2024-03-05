@@ -35,7 +35,7 @@ const Navbar: FC = () => {
         <div className="flex gap-10 items-center">
             {dataList.map((data, index) => {
             return (
-                <CustNavbarList key={index} title={data.title} path={data.path} />
+                <CustNavbarList key={index} title={data.title} path={data.path} location={"home"} />
             );
             })}
         </div>

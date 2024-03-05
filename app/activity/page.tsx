@@ -1,7 +1,7 @@
 "use client";
 
 import CustBannerPage from "../components/atoms/custBannerPage";
-import banner from "@/app/assets/cs-contact.jpg";
+import banner from "@/app/assets/activity-activity.jpg";
 import CustTabActivity from "../components/atoms/custTabActivity";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";

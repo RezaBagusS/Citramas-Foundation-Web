@@ -43,7 +43,7 @@ const NavbarScroll = () => {
     },[]);
 
   return (
-    <div className={`w-full fixed bg-custBlack z-50 transition-all duration-300
+    <div className={`w-full fixed bg-slate-100 z-50 transition-all duration-300
         ${pathname == "/" ? scrollY > 120 ? "shadow-md top-0" : "-top-full" : "shadow-md top-0"}
     `}>
       <div className="cust-container flex justify-between py-3">
@@ -56,7 +56,7 @@ const NavbarScroll = () => {
         <div className="flex gap-10 items-center">
           {dataList.map((data, index) => {
             return (
-              <CustNavbarList key={index} title={data.title} path={data.path} />
+              <CustNavbarList key={index} title={data.title} path={data.path} location="scroll" />
             );
           })}
         </div>

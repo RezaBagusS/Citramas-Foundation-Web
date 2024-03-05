@@ -7,9 +7,10 @@ import { useEffect, useState } from "react";
 interface CustNavbarListProps {
     title: string;
     path: string;
+    location: string;
 }
 
-const CustNavbarList = ({title, path}:CustNavbarListProps) => {
+const CustNavbarList = ({title, path, location}:CustNavbarListProps) => {
 
   const [isActive, setIsActive] = useState(false);
   const pathname = usePathname();
@@ -29,7 +30,9 @@ const CustNavbarList = ({title, path}:CustNavbarListProps) => {
   },[pathname, path])
 
   return (
-    <Link href={path} className="relative text-custWhite whitespace-nowrap hover:text-custWhite/70 group">
+    <Link href={path} className={`relative whitespace-nowrap group
+        ${location == "home" ? "text-custWhite hover:text-custWhite/70" : "text-custBlack hover:text-custBlack/70"}
+    `}>
         <p>{title}</p>
         <span className={`absolute -bottom-2 bg-custPrimary h-1 rounded-full group-hover:w-full transition-all duration-300
         ${isActive ? "w-full" : "w-0"}

@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
-import NavbarScroll from "./components/molecules/navbarScroll";
-import { Suspense } from "react";
+import MainKonten from "./libs/mainKonten";
+import Footer from "./components/section/footer";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -22,8 +22,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${poppins.className} max-w-[1400px] mx-auto`}>
-        <NavbarScroll />
-        <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
+          <MainKonten>
+            {children}
+            <Footer />
+          </MainKonten>
       </body>
     </html>
   );
