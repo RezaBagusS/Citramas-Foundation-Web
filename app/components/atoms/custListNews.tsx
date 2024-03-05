@@ -11,14 +11,6 @@ interface INews {
   }
 }
 
-const dataNews = {
-  title: "15 Tahun Fokus di Olahraga Layar",
-  description: "Deskripsi lainnya adalah ini deskripsi loh",
-  date: "2024-03-05 21:28:15.006",
-  path: "#",
-  note: "(Kutipan berita Koran Sindo, Selasa 8 November 2016, ditulis oleh Zainal Abidin)",
-};
-
 const CustListNews = ({ data }:INews) => {
   
   const formatDate = (dateStr: Date | null) => {

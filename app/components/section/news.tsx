@@ -1,5 +1,6 @@
 import CustCardArticle from "../atoms/custCardArticle";
 import CustTagTittle from "../atoms/custTagTittle";
+import prisma from "@/app/libs/prisma";
 
 const dataArticle = [
     {
@@ -27,15 +28,32 @@ const dataArticle = [
 ]
 
 
-const News = () => {
+const News = async () => {
+
+  const dataNews = await prisma.news.findMany({
+    orderBy: {
+      date: "desc",
+    },
+    select: {
+      id: true,
+      title: true,
+      description: true,
+      date: true,
+      note: true,
+      path: true,
+    },
+  });
+
+  const dataSlice = dataNews.slice(0, 3);
+
   return (
     <div className="cust-container relative">
       <CustTagTittle text="News" />
       <div className="grid grid-cols-3 gap-5 py-10">
         {
-            dataArticle.map((item, index) => {
+            dataSlice.map((item, index) => {
                 return (
-                    <CustCardArticle key={index} title={item.title} desc={item.desc} path={item.path} date={item.date} />
+                    <CustCardArticle key={index} data={item} />
                 )
             })
         }
