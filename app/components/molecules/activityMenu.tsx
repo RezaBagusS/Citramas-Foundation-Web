@@ -34,7 +34,7 @@ const ActivityMenu = ({ dataTab }: ActivityMenuProps) => {
     if (titleParams) {
       dispatch(setActive({ show: titleParams }));
     }
-  }, [titleParams]);
+  }, [titleParams, dispatch]);
 
   return (
     <>

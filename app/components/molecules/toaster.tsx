@@ -20,7 +20,7 @@ const Toaster = () => {
                 onClose();
             }, 5000);
         }
-    }, [toast.show]);
+    }, [toast.show, onClose]);
 
   return toast.show && (
     <motion.div 

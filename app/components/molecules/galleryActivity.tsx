@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import getDataImage from "@/app/helpers/getDataImage";
 import { useDispatch } from "react-redux";
@@ -49,7 +50,7 @@ const GalleryActivity = ({ dataActivityList }: GalleryActivityProps) => {
 
   useEffect(() => {
     titleParams ? getImage() : setLoading(false);
-  }, [itemParams]);
+  }, [itemParams,titleParams, getImage]);
 
   const onClickImage = (url: string) => {
     dispatch(
@@ -100,11 +101,7 @@ const GalleryActivity = ({ dataActivityList }: GalleryActivityProps) => {
                     onClick={() => onClickImage(data.url)}
                     className="relative w-full cursor-pointer h-fit rounded-xl overflow-hidden shadow-[0px_0px_2px_rgba(0,0,0,0.3)]"
                   >
-                    <img
-                      src={data.url}
-                      className="w-full h-full object-cover object-center"
-                      alt="MissingIMG"
-                    />
+                  <Image src={data.url} className="w-full h-full object-cover object-center" alt="MissingIMG" />
                   </div>
                 </div>
               );

@@ -2,8 +2,9 @@
 
 import { setOpenImage } from "@/app/redux/slices/reduxOpenImageSlices";
 import { motion } from "framer-motion";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import Image from "next/image";
+
 
 const PopupImage = () => {
   const dataPopupImage = useSelector((state: any) => state.openImage.data);
@@ -31,7 +32,7 @@ const PopupImage = () => {
             className="text-3xl absolute top-4 right-8 bg-slate-200/30 hover:bg-slate-200/20 transition-all duration-200 flex justify-center items-center cursor-pointer w-10 h-10 rounded-full">
                 x
             </span>
-            <img src={dataPopupImage.url} alt="image" className="w-auto h-full" />
+            <Image src={dataPopupImage.url} alt="image" className="w-auto h-full" />
         </motion.div>
       </div>
     )
