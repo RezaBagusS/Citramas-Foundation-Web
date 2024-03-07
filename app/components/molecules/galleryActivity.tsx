@@ -50,7 +50,7 @@ const GalleryActivity = ({ dataActivityList }: GalleryActivityProps) => {
 
   useEffect(() => {
     titleParams ? getImage() : setLoading(false);
-  }, [itemParams,titleParams, getImage]);
+  }, [itemParams,titleParams]);
 
   const onClickImage = (url: string) => {
     dispatch(
