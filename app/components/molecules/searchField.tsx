@@ -20,7 +20,7 @@ const SearchField = () => {
       <input
         type="text"
         onChange={handleSearch}
-        className="w-full bg-slate-100 ps-14 text-sm pe-4 py-3 active:outline-none focus:outline-none"
+        className="w-full bg-slate-100 ps-14 text-xs md:text-sm pe-4 py-3 active:outline-none focus:outline-none"
         placeholder="Search"
       />
     </div>

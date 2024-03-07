@@ -1,10 +1,13 @@
 'use client'
 
-import logo from "../../assets/logo.png";
+import logo from "../../assets/logo.webp";
 import Image from "next/image";
 import CustNavbarList from "../atoms/custNavbarList";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
+import { IoMenu } from "react-icons/io5";
+import { useDispatch } from "react-redux";
+import { setMobileMenu } from "@/app/redux/slices/reduxMobileMenuSlices";
 
 const dataList = [
   {
@@ -30,6 +33,12 @@ const NavbarScroll = () => {
     const [scrollY, setScrollY] = useState(0);
     const pathname = usePathname();
 
+    const dispatch = useDispatch();
+
+  const handleOpen = () => {
+    dispatch(setMobileMenu({ show: true }));
+  }
+
     useEffect(() => {
         const handleScroll = () => {
             setScrollY(window.scrollY);
@@ -43,7 +52,7 @@ const NavbarScroll = () => {
     },[]);
 
   return (
-    <div className={`w-full fixed bg-slate-100 z-50 transition-all duration-300
+    <div className={`w-full fixed bg-slate-100 z-40 transition-all duration-300
         ${pathname == "/" ? scrollY > 120 ? "shadow-md top-0" : "-top-full" : "shadow-md top-0"}
     `}>
       <div className="cust-container flex justify-between py-3">
@@ -53,7 +62,10 @@ const NavbarScroll = () => {
           alt="CITRAMAS FOUNDATION BATAM"
           height={45}
         />
-        <div className="flex gap-10 items-center">
+        <div className="md:hidden flex items-center">
+          <IoMenu onClick={handleOpen} className="text-custBlack text-4xl cursor-pointer" />
+        </div>
+        <div className="hidden md:flex gap-10 items-center">
           {dataList.map((data, index) => {
             return (
               <CustNavbarList key={index} title={data.title} path={data.path} location="scroll" />

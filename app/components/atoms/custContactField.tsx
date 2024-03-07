@@ -14,14 +14,14 @@ const CustContactField = (({ label, placeholder, type, regist }: CustSettingFiel
 
   return (
     <div className="text-custBlack flex flex-col gap-0">
-      <label className="font-semibold text-base mb-1">{label}</label>
+      <label className="font-semibold text-sm md:text-base mb-1">{label}</label>
       {
         label == "Message" ? (
             <textarea
                 placeholder={placeholder}
                 {...regist(lowerLabel)}
                 required
-                className="text-sm px-3 py-2 text-custBlack/70 rounded-md border active:outline-none focus:outline-none focus:border-custBlack/70 font-normal"
+                className="text-xs md:text-sm px-3 py-2 text-custBlack/70 rounded-md border active:outline-none focus:outline-none focus:border-custBlack/70 font-normal"
             />
             ) : (
             <input
@@ -29,7 +29,7 @@ const CustContactField = (({ label, placeholder, type, regist }: CustSettingFiel
                 placeholder={placeholder}
                 {...regist(lowerLabel)}
                 required
-                className="text-sm px-3 py-2 text-custBlack/70 rounded-md border active:outline-none focus:outline-none focus:border-custBlack/70 font-normal"
+                className="text-xs md:text-sm px-3 py-2 text-custBlack/70 rounded-md border active:outline-none focus:outline-none focus:border-custBlack/70 font-normal"
             />
         )
       }

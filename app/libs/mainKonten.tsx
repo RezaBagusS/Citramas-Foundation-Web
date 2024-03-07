@@ -5,6 +5,7 @@ import store from "../redux/store";
 import NavbarScroll from "../components/molecules/navbarScroll";
 import { Suspense } from "react";
 import Toaster from "../components/molecules/toaster";
+import MobileMenu from "../components/molecules/mobileMenu";
 
 interface MainKontenProps {
     children: React.ReactNode;
@@ -13,6 +14,7 @@ interface MainKontenProps {
 export default function MainKonten<FC>({ children }: MainKontenProps) {
     return (
         <Provider store={store}>
+            <MobileMenu />
             <Toaster />
             <NavbarScroll />
             <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>

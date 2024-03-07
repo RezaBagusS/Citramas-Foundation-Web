@@ -38,11 +38,11 @@ const CustCardArticle = ({ data }: CustCardArticleProps) => {
       <div className="flex items-center justify-between mt-10">
         <Link
           href={data.path}
-          className="text-sm px-4 py-2 bg-custPrimary hover:bg-custPrimary/70 transition-all duration-200 text-custWhite"
+          className="text-xs md:text-sm px-4 py-2 w-fit bg-custPrimary hover:bg-custPrimary/70 transition-all duration-200 text-custWhite"
         >
-          Read More
+          More
         </Link>
-        <span className="text-sm text-gray-400">{formatDate(data.date)}</span>
+        <span className="ms-2 lg:ms-0 text-xs md:text-sm text-gray-400">{formatDate(data.date)}</span>
       </div>
     </article>
   );

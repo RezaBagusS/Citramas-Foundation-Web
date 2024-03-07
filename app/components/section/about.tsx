@@ -1,18 +1,18 @@
 import CustTagTittle from "../atoms/custTagTittle";
 import Image from "next/image";
-import logoPotrait from "../../assets/logoPotrait.jpg";
+import logoPotrait from "../../assets/logoPotrait.webp";
 import BannerMission from "../molecules/bannerMission";
-import pendiri from "../../assets/pendiri.png";
+import pendiri from "../../assets/pendiri.webp";
 
 const About = () => {
   return (
     <div className="cust-container relative pt-20">
       <CustTagTittle text="About" />
-      <div className="grid grid-cols-12 py-10">
-        <div className="col-span-3 grid place-content-center">
+      <div className="grid grid-cols-12 py-4 md:py-10">
+        <div className="col-span-3 hidden lg:grid place-content-center">
           <Image src={logoPotrait} alt="hero" width={200} />
         </div>
-        <div className="col-span-6 text-custBlack/80 flex flex-col text-sm gap-2">
+        <div className="col-span-12 lg:col-span-6 text-custBlack/80 flex flex-col text-xs md:text-sm gap-2 mb-5 md:mb-0">
           <p className="text-justify">
             Citramas Foundation is a charitable organization involved in
             ameliorating the conditions of upbringing for children in Indonesia.
@@ -45,11 +45,14 @@ const About = () => {
             children.
           </p>
         </div>
-        <div className="col-span-3 grid gap-3 place-content-center">
-          <Image src={pendiri} alt="hero" width={240} />
+        <div className="col-span-6 grid lg:hidden place-content-center">
+          <Image src={logoPotrait} alt="hero" className="w-[120px]" />
+        </div>
+        <div className="col-span-6 lg:col-span-3 grid gap-3 place-content-center">
+          <Image src={pendiri} alt="hero" className="w-[120px] lg:w-[240px] mx-auto" />
           <div className="flex flex-col items-center w-fit mx-auto">
-            <h2 className="font-semibold text-lg text-custPrimary">Kris Wiluan</h2>
-            <p className="text-custBlack/70">Founder Citramas Group</p>
+            <h2 className="font-semibold text-sm md:text-lg text-custPrimary">Kris Wiluan</h2>
+            <p className="text-custBlack/70 text-sm md:text-base">Founder Citramas Group</p>
           </div>
         </div>
       </div>

@@ -30,7 +30,7 @@ const CustNavbarList = ({title, path, location}:CustNavbarListProps) => {
   },[pathname, path])
 
   return (
-    <Link href={path} className={`relative whitespace-nowrap group
+    <Link href={path} className={`relative whitespace-nowrap group text-sm md:text-base
         ${location == "home" ? "text-custWhite hover:text-custWhite/70" : "text-custBlack hover:text-custBlack/70"}
     `}>
         <p>{title}</p>

@@ -1,5 +1,5 @@
 import CustBannerPage from "../components/atoms/custBannerPage";
-import banner from "@/app/assets/reporter-news.jpg";
+import banner from "@/app/assets/reporter-news.webp";
 import Calendar from "../components/molecules/calendar";
 import LeftSide from "./leftside";
 import prisma from  "@/app/libs/prisma"
@@ -30,10 +30,10 @@ const Page: React.FC = async () => {
         />
       </div>
       <div className="cust-container py-5 grid grid-cols-12">
-        <div className="col-span-7">
+        <div className="col-span-12 lg:col-span-7">
           <LeftSide data={dataNews} />
         </div>
-        <div className="col-span-5 ps-10">
+        <div className="col-span-12 lg:col-span-5 mt-5 lg:mt-0 lg:ps-10">
           <Calendar data={dataNews} />
           <div className="flex flex-col gap-2 py-5">
             <div className="flex items-center gap-3">

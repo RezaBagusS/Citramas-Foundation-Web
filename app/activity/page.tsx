@@ -1,10 +1,9 @@
-"use client";
-
 import CustBannerPage from "../components/atoms/custBannerPage";
-import banner from "@/app/assets/activity-activity.jpg";
-import CustTabActivity from "../components/atoms/custTabActivity";
-import { useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
+import banner from "@/app/assets/activity-activity.webp";
+import ActivityMenu from "../components/molecules/activityMenu";
+import ActivityList from "../components/molecules/activityList";
+import prisma from "../libs/prisma";
+import GalleryActivity from "../components/molecules/galleryActivity";
 
 const dataTab = [
   {
@@ -82,27 +81,11 @@ const dataTab = [
   },
 ];
 
-const Page: React.FC = () => {
-  const [isActive, setIsActive] = useState("health");
-
-  const searchParams = useSearchParams();
-
-  const titleParams = searchParams.get("title");
-
-  const handleActive = (title: string) => {
-    setIsActive(title);
-  };
-
-  useEffect(() => {
-    console.log(titleParams);
-    
-    if (titleParams) {
-      setIsActive(titleParams);
-    }
-  },[titleParams])
+const Page: React.FC = async () => {
+  const dataTab = await prisma.activity.findMany();
+  const dataActivityList = await prisma.listActivity.findMany();
 
   return (
-  
     <div className="w-full relative pt-[69px]">
       <div className="relative drop-shadow-sm">
         <CustBannerPage
@@ -110,53 +93,36 @@ const Page: React.FC = () => {
           desc="We have several activities that have been implemented and are running well."
           img={banner}
         />
-        <div className="absolute -bottom-12 right-1/2 translate-x-1/2 cust-container grid grid-cols-4 gap-3 py-5">
-          {dataTab.map((item, index) => {
-            return (
-              <CustTabActivity
-                text={item.title}
-                isActive={isActive}
-                handleActive={handleActive}
-                key={index}
-              />
-            );
-          })}
+
+        {/* Activity Menu */}
+        <div className="absolute -bottom-12 right-1/2 translate-x-1/2 cust-container hidden sm:grid grid-cols-2 md:grid-cols-4 gap-3 py-5">
+          <ActivityMenu dataTab={dataTab} />
         </div>
+
       </div>
-      <div className="cust-container pt-14 pb-16 grid grid-cols-12 gap-5">
-        <div className="col-span-3 bg-slate-100 rounded-sm">
+      <div className="cust-container pt-8 md:pt-14 pb-16 grid grid-cols-12 gap-5">
+        <div className="col-span-12 sm:hidden grid grid-cols-2 gap-3">
+          <ActivityMenu dataTab={dataTab} />
+        </div>
+
+        <div className="col-span-12 md:col-span-3 bg-slate-100 rounded-sm sm:mt-8">
           <h3 className="p-3 border-b-2 text-lg font-medium">
             List Of Activity
           </h3>
-          <div className="flex flex-col gap-4 text-xs md:text-sm p-3">
-            {dataTab
-              .filter((item) => item.title.replace(/ /g, "-").toLowerCase() == isActive.replace(/ /g, "-").toLowerCase())
-              .map((item) => {
 
-                const itemTitle = item.title.replace(/ /g, "-").toLowerCase();
-
-                return item.activityList.map((item, index) => {
-
-                  const lowerItem = item.replace(/ /g, "-").toLowerCase();
-
-                  return (
-                    <a
-                      href={`/activity?title=${itemTitle}&item=${lowerItem}`}
-                      className="cursor-pointer hover:text-gray-500 text-gray-800"
-                      key={index}
-                    >
-                      {item}
-                    </a>
-                  );
-                });
-              })}
-          </div>
+          {/* Activity List */}
+            <ActivityList
+              dataTab={dataTab}
+              dataActivityList={dataActivityList}
+            />
         </div>
-        <div className="col-span-9">
-          <h3 className="p-3 border-b-2 text-lg font-medium">Gallery :</h3>
-          <span className="p-3 text-xs text-red-400">
+        <div className="col-span-12 md:col-span-9">
+          {/* Galery List */}
+          <GalleryActivity dataActivityList={dataActivityList} />
+
+          {/* <span className="p-3 text-xs text-red-400">
             *No one activity selected, please select activity on Activity List
-          </span>
+          </span> */}
         </div>
       </div>
     </div>

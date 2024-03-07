@@ -45,7 +45,7 @@ const LeftSide = ({ data }: LeftSideProps) => {
         return <CustListNews key={index} data={item} />;
       })}
       {slicedData.length < filteredData.length && (
-        <button className="text-custPrimary font-medium py-1 px-4 bg-slate-100 w-fit mx-auto border-1" onClick={handleShowMore}>
+        <button className="text-custPrimary text-xs sm:text-sm md:text-base font-medium py-1 px-4 bg-slate-100 w-fit mx-auto border-1" onClick={handleShowMore}>
           {showMore ? "Show Less" : "Show More"}
         </button>
       )}

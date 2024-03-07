@@ -1,32 +1,7 @@
 import CustCardArticle from "../atoms/custCardArticle";
 import CustTagTittle from "../atoms/custTagTittle";
 import prisma from "@/app/libs/prisma";
-
-const dataArticle = [
-    {
-        id: 1,
-        title: "Lorem Ipsum Dolor Sit Amet",
-        desc: "Lorem ipsum dolor sit amet.",
-        path: "#",
-        date: "Wednesday, 12 May 2021"
-    },
-    {
-        id: 2,
-        title: "Lorem Ipsum Dolor Sit Amet",
-        desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        path: "#",
-        date: "Wednesday, 12 May 2021"
-    },
-    {
-        id: 3,
-        title: "Lorem Ipsum Dolor Sit Amet",
-        desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        path: "#",
-        date: "Wednesday, 12 May 2021"
-    },
-
-]
-
+import Link from "next/link";
 
 const News = async () => {
 
@@ -49,7 +24,7 @@ const News = async () => {
   return (
     <div className="cust-container relative">
       <CustTagTittle text="News" />
-      <div className="grid grid-cols-3 gap-5 py-10">
+      <div className="grid  md:grid-cols-3 gap-5 pt-10 pb-5">
         {
             dataSlice.map((item, index) => {
                 return (
@@ -57,6 +32,14 @@ const News = async () => {
                 )
             })
         }
+      </div>
+      <div className="flex justify-center mb-5">
+        <Link
+          href={"/news"}
+          className="text-sm px-4 py-2 bg-custPrimary hover:bg-custPrimary/70 transition-all duration-200 text-custWhite"
+        >
+          See All News
+        </Link>
       </div>
     </div>
   );

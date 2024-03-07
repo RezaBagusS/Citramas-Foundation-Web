@@ -41,9 +41,9 @@ const FormContact = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="border bg-white drop-shadow-sm rounded-sm p-5"
+      className="border bg-white drop-shadow-sm rounded-sm p-5 col-span-2 lg:col-span-1"
     >
-      <h2 className="text-xl font-semibold text-custBlack">
+      <h2 className="text-lg md:text-xl font-semibold text-custBlack">
         Send your messages
       </h2>
       <div className="flex flex-col gap-3 mt-5">
@@ -75,11 +75,11 @@ const FormContact = () => {
       <div className="flex justify-start items-center gap-4 mt-5">
         <button
           disabled={whileSubmit}
-          className="bg-custPrimary text-white rounded-md hover:bg-custPrimary/90 py-2 px-4 disabled:cursor-not-allowed disabled:bg-custPrimary/70 transition-all duration-200"
+          className="bg-custPrimary text-white text-sm md:text-base rounded-md hover:bg-custPrimary/90 py-2 px-4 disabled:cursor-not-allowed disabled:bg-custPrimary/70 transition-all duration-200"
         >
           {whileSubmit ? <FiLoader className="animate-spin text-2xl" /> : "Send"}
         </button>
-        <div onClick={resetForm} className="text-custBlack/80 cursor-pointer hover:underline">Reset</div>
+        <div onClick={resetForm} className="text-custBlack/80 cursor-pointer text-sm md:text-base hover:underline">Reset</div>
       </div>
     </form>
   );
