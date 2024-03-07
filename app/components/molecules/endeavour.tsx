@@ -33,7 +33,7 @@ const dataEndeavour = [
 
 const Endeavour = () => {
     return (
-        <div className="cust-container z-20 absolute -bottom-14 left-1/2 -translate-x-1/2 grid grid-cols-6 place-content-center rounded-lg overflow-hidden border-2 border-custWhite">
+        <div className="cust-container z-30 absolute -bottom-14 left-1/2 -translate-x-1/2 grid grid-cols-6 place-content-center rounded-lg overflow-hidden border-2 border-custWhite">
             {dataEndeavour.map((data, index) => {
                 return (
                     <CustCardEndeavour key={index} title={data.title} icon={data.icon} />

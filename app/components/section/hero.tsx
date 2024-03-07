@@ -13,7 +13,7 @@ const Hero: FC = () => {
           </p>
         </main>
       </div>
-      <div className="hidden md:relative">
+      <div className="hidden lg:flex relative">
         <Endeavour />
       </div>
     </div>
