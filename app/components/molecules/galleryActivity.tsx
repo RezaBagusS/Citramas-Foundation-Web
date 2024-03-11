@@ -50,7 +50,7 @@ const GalleryActivity = ({ dataActivityList }: GalleryActivityProps) => {
 
   useEffect(() => {
     titleParams ? getImage() : setLoading(false);
-  }, [itemParams,titleParams]);
+  }, [itemParams, titleParams]);
 
   const onClickImage = (url: string) => {
     dispatch(
@@ -76,17 +76,16 @@ const GalleryActivity = ({ dataActivityList }: GalleryActivityProps) => {
         </span>
       </h3>
       <div className="w-full h-full">
-        {
-            !titleParams ? (
-                <span className="p-3 text-xs text-red-400">
-                    *No one activity selected, please select activity on Activity List
-                </span>
-            ) : loading ? (
-                <div className="columns-2 md:columns-3 lg:columns-4 mt-10">
-                <div className="bg-slate-400 my-2 md:my-0 animate-pulse w-full h-[350px]"></div>
-                <div className="bg-slate-400 my-2 md:my-0 animate-pulse w-full h-[350px]"></div>
-                </div>
-            ) : filteredData.length == 0 ? (
+        {!titleParams ? (
+          <span className="p-3 text-xs text-red-400">
+            *No one activity selected, please select activity on Activity List
+          </span>
+        ) : loading ? (
+          <div className="columns-2 md:columns-3 lg:columns-4 mt-10">
+            <div className="bg-slate-400 my-2 md:my-0 animate-pulse w-full h-[350px]"></div>
+            <div className="bg-slate-400 my-2 md:my-0 animate-pulse w-full h-[350px]"></div>
+          </div>
+        ) : filteredData.length == 0 ? (
           <div className="w-full py-10">
             <p className="text-center text-gray-700 text-lg font-semibold">
               image not found in this activity ...
@@ -101,7 +100,13 @@ const GalleryActivity = ({ dataActivityList }: GalleryActivityProps) => {
                     onClick={() => onClickImage(data.url)}
                     className="relative w-full cursor-pointer h-fit rounded-xl overflow-hidden shadow-[0px_0px_2px_rgba(0,0,0,0.3)]"
                   >
-                  <Image src={data.url} className="w-full h-full object-cover object-center" alt="MissingIMG" />
+                    <Image
+                      src={data.url}
+                      width={500}
+                      height={350}
+                      className="h-full w-full object-cover object-center"
+                      alt="MissingIMG"
+                    />
                   </div>
                 </div>
               );
