@@ -1,6 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
   reactStrictMode: false,
   env: {
     NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME:
