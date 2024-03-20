@@ -11,7 +11,7 @@ const CustBannerPage = ({
 }: CustBannerPageProps) => {
     return (
         <div className="md:h-80 w-full relative bg-[#f5f2f2]">
-            <div className="cust-container absolute left-1/2 -translate-x-1/2 md:translate-x-0 md:left-12 lg:left-0 lg:relative z-30 flex flex-col justify-center h-full">
+            <div className="cust-container absolute left-1/2 -translate-x-1/2 md:translate-x-0 md:left-12 lg:left-0 lg:relative z-20 flex flex-col justify-center h-full">
                 <div className="flex flex-col items-center md:items-start gap-3">
                     <span className="text-custPrimary bg-white px-3 py-1 lg:py-0 lg:px-0 lg:bg-transparent w-fit text-xl md:text-3xl lg:text-4xl font-semibold">{title}</span>
                     <span className="w-10/12 md:w-1/2 lg:w-1/3 px-3 py-1 lg:py-0 lg:px-0 text-[10px] sm:text-sm md:text-base text-custBlack/70 bg-white lg:bg-transparent">

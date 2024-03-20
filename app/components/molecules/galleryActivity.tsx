@@ -11,6 +11,7 @@ interface GalleryActivityProps {
   dataActivityList: {
     id: number;
     id_activity: number;
+    description: string;
     name: string;
     createdAt: Date;
   }[];
@@ -27,6 +28,7 @@ interface DataImage {
 const GalleryActivity = ({ dataActivityList }: GalleryActivityProps) => {
   const [loading, setLoading] = useState(true);
   const [filteredData, setFilteredData] = useState<DataImage[]>([]);
+  const [desc, setDesc] = useState<string>("");
   const searchParams = useSearchParams();
   const dispatch = useDispatch();
 
@@ -40,7 +42,13 @@ const GalleryActivity = ({ dataActivityList }: GalleryActivityProps) => {
   const getImage = async () => {
     const dataImage = await getDataImage(getActivityList[0].id);
 
+    if (getActivityList.length > 0) {
+      console.log("GET ACTIVITY LIST : ",getActivityList);
+      setDesc(getActivityList[0].description);
+    }
+
     if (dataImage.length > 0) {
+      console.log("DATA IMAGE : ",dataImage);
       setFilteredData(dataImage);
     }
     setTimeout(() => {
@@ -49,7 +57,9 @@ const GalleryActivity = ({ dataActivityList }: GalleryActivityProps) => {
   };
 
   useEffect(() => {
-    titleParams ? getImage() : setLoading(false);
+    titleParams
+      ? getImage()
+      : setLoading(false);
   }, [itemParams, titleParams]);
 
   const onClickImage = (url: string) => {
@@ -75,6 +85,12 @@ const GalleryActivity = ({ dataActivityList }: GalleryActivityProps) => {
       `}
         </span>
       </h3>
+      {desc && (
+        <div className="w-full flex-col gap-1 p-3 flex items-start justify-center border-b-2">
+          <h5 className="text-sm text-justify font-medium text-gray800">Description :</h5>
+          <p className="text-sm text-justify text-gray-600">{desc}</p>
+        </div>
+      )}
       <div className="w-full h-full">
         {!titleParams ? (
           <span className="p-3 text-xs text-red-400">
@@ -92,26 +108,29 @@ const GalleryActivity = ({ dataActivityList }: GalleryActivityProps) => {
             </p>
           </div>
         ) : (
-          <div className="columns-2 md:columns-3 lg:columns-4 mt-10">
-            {filteredData.map((data) => {
-              return (
-                <div key={data.id} className="py-2">
-                  <div
-                    onClick={() => onClickImage(data.url)}
-                    className="relative w-full cursor-pointer h-fit rounded-xl overflow-hidden shadow-[0px_0px_2px_rgba(0,0,0,0.3)]"
-                  >
-                    <Image
-                      src={data.url}
-                      width={500}
-                      height={350}
-                      className="h-full w-full object-cover object-center"
-                      alt="MissingIMG"
-                    />
+          <>
+            <div className=""></div>
+            <div className="columns-2 md:columns-3 lg:columns-4 mt-10">
+              {filteredData.map((data) => {
+                return (
+                  <div key={data.id} className="py-2">
+                    <div
+                      onClick={() => onClickImage(data.url)}
+                      className="relative w-full cursor-pointer h-fit rounded-xl overflow-hidden shadow-[0px_0px_2px_rgba(0,0,0,0.3)]"
+                    >
+                      <Image
+                        src={data.url}
+                        width={500}
+                        height={350}
+                        className="h-full w-full object-cover object-center"
+                        alt="MissingIMG"
+                      />
+                    </div>
                   </div>
-                </div>
-              );
-            })}
-          </div>
+                );
+              })}
+            </div>
+          </>
         )}
       </div>
     </>

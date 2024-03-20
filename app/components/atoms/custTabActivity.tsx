@@ -19,7 +19,7 @@ const CustTabActivity = ({
   return (
     <div
       onClick={() => handleActive(text)}
-      className={`relative w-full text-sm flex overflow-hidden items-center gap-5 p-5 bg-white hover:bg-gray-50 cursor-pointer border drop-shadow-sm hover:drop-shadow-md rounded-md transition-all duration-150
+      className={`relative w-full text-sm flex overflow-hidden items-center gap-5 p-5 z-30 bg-white hover:bg-gray-50 cursor-pointer border drop-shadow-sm hover:drop-shadow-md rounded-md transition-all duration-150
         ${isSame() ? "border-gray-300" : ""}
       `}
     >

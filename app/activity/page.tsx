@@ -119,10 +119,6 @@ const Page: React.FC = async () => {
         <div className="col-span-12 md:col-span-9">
           {/* Galery List */}
           <GalleryActivity dataActivityList={dataActivityList} />
-
-          {/* <span className="p-3 text-xs text-red-400">
-            *No one activity selected, please select activity on Activity List
-          </span> */}
         </div>
       </div>
     </div>
