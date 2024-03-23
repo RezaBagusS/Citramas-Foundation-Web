@@ -7,6 +7,7 @@ import { Pagination, Keyboard } from "swiper/modules";
 // Import Swiper styles
 import "swiper/swiper-bundle.css";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 interface ActivitySliderProps {
   dataSlider: {

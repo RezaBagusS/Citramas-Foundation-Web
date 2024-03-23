@@ -8,7 +8,13 @@ const nextConfig = {
       process.env.NEXT_PUBLIC_CLOUDINARY_PRESET_NAME,
   },
   images: {
-    domains: ["res.cloudinary.com"],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'res.cloudinary.com',
+        pathname: '**',
+      },
+    ],
   },
 };
 
