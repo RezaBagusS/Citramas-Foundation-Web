@@ -1,5 +1,3 @@
-'use client'
-
 import React from "react";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -62,7 +60,11 @@ const ActivitySlider = ({ dataSlider }: ActivitySliderProps) => {
             <div 
             onClick={() => handleClick(item.activity, item.name)}
             className="relative mb-10 cursor-pointer">
-              <Image src={item.url} alt="image" width={300} height={200} className="object-cover w-full h-80" />
+              <img
+                src={item.url}
+                alt="image"
+                className="w-full h-80 object-cover"
+              />
               <div className="absolute bottom-0 left-0 w-full bg-black/70 p-2">
                 <h1 className="text-white text-lg font-bold">{item.name}</h1>
                 <p className="text-white text-sm">{item.activity}</p>
