@@ -21,7 +21,13 @@ const News = () => {
 
   useEffect(() => {
     
-    fetch(backendURL)
+    fetch("https://citramas-foundation-web.vercel.app/api/v1/dataSlider",{
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Allow-Control-Allow-Origin": "*",
+      },
+    })
       .then((res) => res.json())
       .then((data) => {
         if (data.error) {
