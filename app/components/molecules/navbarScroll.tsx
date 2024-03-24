@@ -61,6 +61,7 @@ const NavbarScroll = () => {
           priority
           alt="CITRAMAS FOUNDATION BATAM"
           height={45}
+          width={90}
         />
         <div className="md:hidden flex items-center">
           <IoMenu onClick={handleOpen} className="text-custBlack text-4xl cursor-pointer" />

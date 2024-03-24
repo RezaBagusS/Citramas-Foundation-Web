@@ -43,6 +43,7 @@ const Navbar: FC = () => {
           priority
           alt="CITRAMAS FOUNDATION BATAM"
           height={60}
+          width={120}
         />
         <div className="md:hidden flex items-center">
           <IoMenu onClick={handleOpen} className="text-custWhite text-4xl cursor-pointer" />

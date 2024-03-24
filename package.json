@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "dev node server.js",
-    "build": "next build",
+    "dev": "next dev",
     "start": "NODE_ENV=production node server.js",
+    "build": "next build",
     "lint": "next lint",
     "postinstall": "prisma generate"
   },

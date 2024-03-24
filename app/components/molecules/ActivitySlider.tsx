@@ -1,3 +1,5 @@
+'use client'
+
 import React from "react";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -10,14 +12,16 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 
 interface ActivitySliderProps {
-  dataSlider: {
-    id: number;
-    id_listActivity: number;
-    url: string;
-    name: string;
-    description: string;
-    activity: string;
-  }[];
+  dataSlider: DataImage[];
+}
+
+interface DataImage {
+  id: number;
+  id_listActivity: number;
+  url: string;
+  name: string;
+  description: string;
+  activity: string;
 }
 
 const ActivitySlider = ({ dataSlider }: ActivitySliderProps) => {
@@ -57,9 +61,10 @@ const ActivitySlider = ({ dataSlider }: ActivitySliderProps) => {
       {dataSlider.map((item, index) => {
         return (
           <SwiperSlide key={index}>
-            <div 
-            onClick={() => handleClick(item.activity, item.name)}
-            className="relative mb-10 cursor-pointer">
+            <div
+              onClick={() => handleClick(item.activity, item.name)}
+              className="relative mb-10 cursor-pointer"
+            >
               <img
                 src={item.url}
                 alt="image"

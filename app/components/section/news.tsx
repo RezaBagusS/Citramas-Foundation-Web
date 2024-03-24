@@ -29,14 +29,12 @@ const News = async () => {
   //     });
   // }, []);
 
-  const res = await activitySlider();
-
-  const dataSlider = res.error ? res.data : [];
+  const dataSlider = await activitySlider();
 
   return (
     <div className="cust-container relative">
       <CustTagTittle text="Activity" />
-      <ActivitySlider dataSlider={dataSlider || []} />
+      <ActivitySlider dataSlider={dataSlider?.data || []} />
     </div>
   );
 };
