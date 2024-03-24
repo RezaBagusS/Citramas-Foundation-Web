@@ -12,22 +12,26 @@ interface DataImage {
   activity: string;
 }
 
-const News = () => {
-  const [dataSlider, setDataSlider] = useState<DataImage[]>([]);
+const News = async () => {
+  // const [dataSlider, setDataSlider] = useState<DataImage[]>([]);
 
-  useEffect(() => {
-    activitySlider()
-      .then((res) => {
-        if (res.error === false) {
-          setDataSlider(res.data || []);
-        } else {
-          console.log(res.message);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+  // useEffect(() => {
+  //   activitySlider()
+  //     .then((res) => {
+  //       if (res.error === false) {
+  //         setDataSlider(res.data || []);
+  //       } else {
+  //         console.log(res.message);
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }, []);
+
+  const res = await activitySlider();
+
+  const dataSlider = res.error ? res.data : [];
 
   return (
     <div className="cust-container relative">
