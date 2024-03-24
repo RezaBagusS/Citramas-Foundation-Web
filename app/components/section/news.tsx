@@ -1,9 +1,9 @@
-"use client";
+'use client'
 
 import CustTagTittle from "../atoms/custTagTittle";
 import React, { useState, useEffect } from 'react';
-// import activitySlider from "@/app/helpers/activitySlider";
 import ActivitySlider from "../molecules/ActivitySlider";
+import activitySlider from "@/app/helpers/activitySlider";
 
 interface DataImage {
   id: number;
@@ -20,32 +20,46 @@ const News = () => {
   const [dataSlider, setDataSlider] = useState<DataImage[]>([]);
 
   useEffect(() => {
-    
-    fetch("https://citramas-foundation-web.vercel.app/api/v1/dataSlider",{
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "Allow-Control-Allow-Origin": "*",
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.error) {
-          console.log(data.message);
-        } else {
-          console.log(data.message);
-          setDataSlider(data.data);
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    // const fetchData = async () => {
+    //   try {
+    //     const response = await fetch(backendURL, {
+    //       method: "GET",
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //       },
+    //     });
+        
+    //     console.log("RESPONSE 1 : ",response);
 
+    //     if (!response.ok) {
+    //       throw new Error(`API request failed with status ${response.status}`);
+    //     }
+
+    //     console.log("RESPONSE 2 : ",response);
+        
+
+    //     const data = await response.json();
+    //     setDataSlider(data.data || []); // Set to empty array if data.data is missing
+    //   } catch (error) {
+    //     console.error("Error fetching data:", error);
+    //     // Handle the error gracefully, e.g., display an error message to the user
+    //   }
+    // };
+
+    // fetchData();
+
+    const fetchUsingPrisma = async () => {
+      await activitySlider()
+        .then((res) => {
+          console.log("RES : ",res);
+        })
+        .catch((err) => {
+          console.log("Error : ",err);
+        });
+    }
+
+    fetchUsingPrisma();
   }, []);
-
-  // useEffect(() => {
-  //   console.log(dataSlider);
-  // }, [dataSlider]);
 
   return (
     <div className="cust-container relative">
