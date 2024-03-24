@@ -3,10 +3,11 @@ const { parse } = require('url')
 const next = require('next')
 
 const dev = process.env.NODE_ENV !== 'production'
-const hostname = process.env.HOSTNAME || 'localhost' // Use environment variable for hostname
-const port = process.env.PORT || 3000
+const hostname = 'citramas-foundation.com'
+const port = process.env.port || 3000
 
-const app = next({ dev })
+// when using middleware `hostname` and `port` must be provided below
+const app = next({ dev, hostname, port })
 const handle = app.getRequestHandler()
 
 app.prepare().then(() => {
@@ -15,7 +16,25 @@ app.prepare().then(() => {
       const parsedUrl = parse(req.url, true)
       const { pathname, query } = parsedUrl
 
-      await handle(req, res, parsedUrl)
+      // Check if the request starts with '/api'
+      if (pathname.startsWith('/api')) {
+        
+        // Remove '/api' from the pathname
+        const apiRoute = pathname.substring(4)
+
+        // Handle API routes using Express.js
+        // app.express is the instance of Express.js
+
+        apiRoute === '/v1/dataSlider'
+          ? res.json({ message: 'Hello from the server!' })
+          : res.json({ message: 'Not Found' })
+
+        // Handle API routes using Next.js API routes functionality
+        // await app.render(req, res, apiRoute, query)
+      } else {
+        // Handle other routes using the default request handler
+        await handle(req, res, parsedUrl)
+      }
     } catch (err) {
       console.error('Error occurred handling', req.url, err)
       res.statusCode = 500

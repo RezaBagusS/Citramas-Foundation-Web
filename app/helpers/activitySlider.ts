@@ -1,5 +1,3 @@
-'use server'
-
 import prisma from "../libs/prisma";
 
 interface DataImage {
@@ -59,7 +57,6 @@ export default async function activitySlider() {
         }
         
     }
-
 
     return {
         error: false,
