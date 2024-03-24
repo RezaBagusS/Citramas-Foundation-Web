@@ -3,12 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "dev node server.js",
     "build": "next build",
-    "start": "NODE_ENV=production node server.js",
-    "export": "next build && next export",
-    "lint": "next lint",
-    "postinstall": "prisma generate"
+    "start": "NODE_ENV=production node server.js"
   },
   "dependencies": {
     "@prisma/client": "^5.10.2",

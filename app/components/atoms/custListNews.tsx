@@ -47,7 +47,7 @@ const CustListNews = ({ data }: INews) => {
             {formatDate(data.date)}
           </p>
           <Link
-            href={"#"}
+            href={data.path}
             className="text-xs whitespace-nowrap px-3 sm:px-4 py-1 sm:py-2 bg-custPrimary hover:bg-custPrimary/70 transition-all duration-200 text-custWhite"
           >
             Read More
