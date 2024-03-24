@@ -2,7 +2,7 @@
 
 import CustTagTittle from "../atoms/custTagTittle";
 import React, { useState, useEffect } from 'react';
-import activitySlider from "@/app/helpers/activitySlider";
+// import activitySlider from "@/app/helpers/activitySlider";
 import ActivitySlider from "../molecules/ActivitySlider";
 
 interface DataImage {
@@ -14,35 +14,37 @@ interface DataImage {
   activity: string;
 }
 
+const backendURL = "/api/v1/dataSlider";
+
 const News = () => {
   const [dataSlider, setDataSlider] = useState<DataImage[]>([]);
 
   useEffect(() => {
-    activitySlider()
-      .then((res) => {
-        if (res.error === false) {
-          setDataSlider(res.data || []);
+    
+    fetch(backendURL)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.error) {
+          console.log(data.message);
         } else {
-          console.log(res.message);
+          console.log(data.message);
+          setDataSlider(data.data);
         }
       })
-      .catch((err) => {
-        console.log(err);
+      .catch((error) => {
+        console.log(error);
       });
+
   }, []);
+
+  // useEffect(() => {
+  //   console.log(dataSlider);
+  // }, [dataSlider]);
 
   return (
     <div className="cust-container relative">
       <CustTagTittle text="Activity" />
       <ActivitySlider dataSlider={dataSlider} />
-      {/* <div className="flex justify-center mb-5">
-        <Link
-          href={"/news"}
-          className="text-sm px-4 py-2 bg-custPrimary hover:bg-custPrimary/70 transition-all duration-200 text-custWhite"
-        >
-          See All News
-        </Link>
-      </div> */}
     </div>
   );
 };
