@@ -20,33 +20,35 @@ const News = () => {
   const [dataSlider, setDataSlider] = useState<DataImage[]>([]);
 
   useEffect(() => {
-    // const fetchData = async () => {
-    //   try {
-    //     const response = await fetch(backendURL, {
-    //       method: "GET",
-    //       headers: {
-    //         "Content-Type": "application/json",
-    //       },
-    //     });
+    const fetchData = async () => {
+      try {
+        const response = await fetch(backendURL, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
         
-    //     console.log("RESPONSE 1 : ",response);
+        console.log("RESPONSE 1 : ",response);
 
-    //     if (!response.ok) {
-    //       throw new Error(`API request failed with status ${response.status}`);
-    //     }
+        if (!response.ok) {
+          throw new Error(`API request failed with status ${response.status}`);
+        }
 
-    //     console.log("RESPONSE 2 : ",response);
+        console.log("RESPONSE 2 : ",response);
         
 
-    //     const data = await response.json();
-    //     setDataSlider(data.data || []); // Set to empty array if data.data is missing
-    //   } catch (error) {
-    //     console.error("Error fetching data:", error);
-    //     // Handle the error gracefully, e.g., display an error message to the user
-    //   }
-    // };
+        const data = await response.json();
+        console.log("DATA : ",data);
+        
+        // setDataSlider(data.data || []); // Set to empty array if data.data is missing
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        // Handle the error gracefully, e.g., display an error message to the user
+      }
+    };
 
-    // fetchData();
+    fetchData();
 
     const fetchUsingPrisma = async () => {
       await activitySlider()
@@ -64,7 +66,7 @@ const News = () => {
   return (
     <div className="cust-container relative">
       <CustTagTittle text="Activity" />
-      <ActivitySlider dataSlider={dataSlider} />
+      {/* <ActivitySlider dataSlider={dataSlider} /> */}
     </div>
   );
 };
