@@ -58,7 +58,7 @@ const ActivitySlider = ({ dataSlider }: ActivitySliderProps) => {
       modules={[Pagination, Keyboard]}
       className="mySwiper mt-10 mb-5"
     >
-      {dataSlider.map((item, index) => {
+      {dataSlider.slice(0,13).map((item, index) => {
         return (
           <SwiperSlide key={index}>
             <div
