@@ -1,5 +1,5 @@
 import CustBannerPage from "../components/atoms/custBannerPage";
-import banner from "@/app/assets/reporter-news.webp";
+import banner from "@/app/assets/reporter-news.png";
 import Calendar from "../components/molecules/calendar";
 import LeftSide from "./leftside";
 import prisma from  "@/app/libs/prisma"

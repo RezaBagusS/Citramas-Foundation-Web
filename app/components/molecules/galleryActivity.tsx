@@ -15,6 +15,7 @@ interface GalleryActivityProps {
     name: string;
     createdAt: Date;
   }[];
+  dataImage: DataImage[];
 }
 
 interface DataImage {
@@ -25,7 +26,7 @@ interface DataImage {
 }
 [];
 
-const GalleryActivity = ({ dataActivityList }: GalleryActivityProps) => {
+const GalleryActivity = ({ dataActivityList, dataImage }: GalleryActivityProps) => {
   const [loading, setLoading] = useState(true);
   const [filteredData, setFilteredData] = useState<DataImage[]>([]);
   const [desc, setDesc] = useState<string>("");
@@ -35,30 +36,29 @@ const GalleryActivity = ({ dataActivityList }: GalleryActivityProps) => {
   const titleParams = searchParams.get("title");
   const itemParams = searchParams.get("item");
 
-  const getActivityList = dataActivityList.filter((item) => {
-    return item.name.replace(/ /g, "-").toLowerCase() == itemParams;
-  });
-
-  const getImage = async () => {
-    const dataImage = await getDataImage(getActivityList[0].id);
-
-    if (getActivityList.length > 0) {
-      console.log("GET ACTIVITY LIST : ",getActivityList);
-      setDesc(getActivityList[0].description);
-    }
-
-    if (dataImage.length > 0) {
-      console.log("DATA IMAGE : ",dataImage);
-      setFilteredData(dataImage);
-    }
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000);
-  };
-
   useEffect(() => {
+
+    const getActivityList = dataActivityList.filter((item) => {
+
+      return item.name.replace(/ /g, "-").toLowerCase() == (itemParams ? itemParams : "eye-screening");
+    });
+
+    const dataImageFilter = (id: number) => {
+      const data = dataImage.filter((item) => item.id_listActivity == id);
+  
+      if (getActivityList.length > 0) {
+        setDesc(getActivityList[0].description);
+      }
+  
+      if (data.length > 0) {
+        setFilteredData(data);
+      }
+  
+      setLoading(false);
+    }
+
     titleParams
-      ? getImage()
+      ? dataImageFilter(getActivityList[0].id)
       : setLoading(false);
   }, [itemParams, titleParams]);
 

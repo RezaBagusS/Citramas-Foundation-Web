@@ -1,5 +1,5 @@
 import Image from "next/image";
-import bgActivity from "../../assets/bgActivity.webp";
+import bgActivity from "../../assets/bgActivity.png";
 import CustCardActivity from "../atoms/custCardActivity";
 
 const dataActivity = [

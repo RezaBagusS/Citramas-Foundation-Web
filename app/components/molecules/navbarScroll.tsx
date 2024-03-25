@@ -1,6 +1,6 @@
 'use client'
 
-import logo from "../../assets/logo.webp";
+import logo from "../../assets/logo.png";
 import Image from "next/image";
 import CustNavbarList from "../atoms/custNavbarList";
 import { useEffect, useState } from "react";
@@ -60,8 +60,8 @@ const NavbarScroll = () => {
           src={logo}
           priority
           alt="CITRAMAS FOUNDATION BATAM"
-          height={45}
-          width={90}
+          width={100}
+          className="h-auto"
         />
         <div className="md:hidden flex items-center">
           <IoMenu onClick={handleOpen} className="text-custBlack text-4xl cursor-pointer" />

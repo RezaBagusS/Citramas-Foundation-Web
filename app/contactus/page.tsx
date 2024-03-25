@@ -2,7 +2,7 @@ import CustBannerPage from "@/app/components/atoms/custBannerPage"
 import { BsFillTelephoneFill } from "react-icons/bs";
 import { MdAttachEmail } from "react-icons/md";
 import FormContact from "../components/section/formContact";
-import banner from "@/app/assets/cs-contact.webp"
+import banner from "@/app/assets/cs-contact.png"
 
 const Contactus: React.FC = () => {
   return (

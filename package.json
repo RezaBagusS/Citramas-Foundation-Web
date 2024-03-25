@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "start": "NODE_ENV=production node server.js",
+    "start": "next start",
     "build": "next build",
     "lint": "next lint",
     "postinstall": "prisma generate"

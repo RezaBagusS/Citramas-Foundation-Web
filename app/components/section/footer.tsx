@@ -1,5 +1,5 @@
 import Image from "next/image";
-import logo from "../../assets/logo.webp";
+import logo from "../../assets/logo.png";
 import { MdHomeWork } from "react-icons/md";
 import { FaPhoneAlt } from "react-icons/fa";
 import { IoPhonePortrait } from "react-icons/io5";
@@ -10,7 +10,7 @@ const Footer = () => {
     <footer className="bg-custWhite">
       <div className="cust-container overflow-hidden grid grid-cols-12 gap-y-10 md:gap-0 border-t-2 py-12 text-custWhite">
         <div className="col-span-12 md:col-span-4 flex flex-col gap-5">
-          <Image src={logo} alt="logo" width={150} height={150} />
+          <Image src={logo} alt="logo" width={200} className="h-auto" />
           <p className="text-gray-500 text-xs sm:text-sm w-full sm:w-8/12 md:w-full">
             The Citramas Foundation is a charitable organization that
             participates in improving the educational conditions of children in

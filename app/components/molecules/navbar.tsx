@@ -1,7 +1,7 @@
 'use client'
 
 import { FC } from "react";
-import logo from "../../assets/logo.webp";
+import logo from "../../assets/logo.png";
 import Image from "next/image";
 import CustNavbarList from "../atoms/custNavbarList";
 import { IoMenu } from "react-icons/io5";
@@ -42,8 +42,8 @@ const Navbar: FC = () => {
           src={logo}
           priority
           alt="CITRAMAS FOUNDATION BATAM"
-          height={60}
-          width={120}
+          width={160}
+          className="h-auto"
         />
         <div className="md:hidden flex items-center">
           <IoMenu onClick={handleOpen} className="text-custWhite text-4xl cursor-pointer" />

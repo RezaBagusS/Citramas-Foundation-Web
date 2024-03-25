@@ -1,8 +1,8 @@
 import CustTagTittle from "../atoms/custTagTittle";
 import Image from "next/image";
-import logoPotrait from "../../assets/logoPotrait.webp";
+import logoPotrait from "../../assets/logoPotrait.png";
 import BannerMission from "../molecules/bannerMission";
-import pendiri from "../../assets/pendiri.webp";
+import pendiri from "../../assets/pendiri.png";
 
 const About = () => {
   return (

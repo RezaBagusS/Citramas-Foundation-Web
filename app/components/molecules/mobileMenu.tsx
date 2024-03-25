@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { IoClose } from "react-icons/io5";
-import logo from "../../assets/logo.webp";
+import logo from "../../assets/logo.png";
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import { setMobileMenu } from "@/app/redux/slices/reduxMobileMenuSlices";
@@ -50,7 +50,8 @@ const MobileMenu: React.FC = () => {
             src={logo}
             priority
             alt="CITRAMAS FOUNDATION BATAM"
-            height={60}
+            width={120}
+            className="h-auto"
           />
           <div className="md:hidden flex items-center">
             <IoClose
