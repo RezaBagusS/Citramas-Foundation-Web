@@ -20,19 +20,19 @@ const Footer = () => {
         <div className="col-span-12 md:col-span-8 flex md:justify-end">
           <div className="lg:pr-20">
             <h4 className="text-custBlack/80 mb-2 sm:mb-5 font-semibold">
-              Our Contact
+              Our Address
             </h4>
             <ul className="text-gray-500 w-80 flex flex-col gap-3 text-xs sm:text-sm">
               <li className="flex w-full">
                 <div className="w-5 h-5">
-                    <MdHomeWork className="inline-block mr-2" />
+                  <MdHomeWork className="inline-block mr-2" />
                 </div>
                 <p>
-                  Kompleks Citranusa Niaga, Jl Mas Surya Negara II No.1 blok A2,
-                  Batu Besar, Kecamatan Nongsa, Kota Batam, Kepulauan Riau 29467
+                  Jalan Hang Kesturi KM. 4. Komplek Ruko Citranusa Niaga Blok A2
+                  No. 1. Kawasan Industri Terpadu Kabil. Batam 29467.
                 </p>
               </li>
-              <li>
+              {/* <li>
                 <FaPhoneAlt width={5} className="inline-block mr-2" />
                 +5766504412 (SG)
               </li>
@@ -43,7 +43,7 @@ const Footer = () => {
               <li>
                 <MdAttachEmail width={5} className="inline-block mr-2" />
                 info@citramas-foundation.com
-              </li>
+              </li> */}
             </ul>
           </div>
         </div>

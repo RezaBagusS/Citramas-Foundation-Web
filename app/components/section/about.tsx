@@ -28,7 +28,7 @@ const About = () => {
           </p>
 
           <p className="text-justify">
-            Founded in 2003 by Mr Kris Taenar Wiluan, Citramas Foundation was
+            Founded in 2003 by Mr. Kris Taenar Wiluan and Mrs. Hedy Kurniawan, Citramas Foundation was
             envisioned as a concomitant entity that would assist acutely
             disadvantaged staff members in the upkeep of their households by
             availing to these beneficiaries educational sponsorships and
@@ -51,7 +51,7 @@ const About = () => {
         <div className="col-span-6 lg:col-span-3 grid gap-3 place-content-center">
           <Image src={pendiri} alt="hero" className="w-[120px] lg:w-[240px] mx-auto" />
           <div className="flex flex-col items-center w-fit mx-auto">
-            <h2 className="font-semibold text-sm md:text-lg text-custPrimary">Kris Wiluan</h2>
+            <h2 className="font-semibold text-sm md:text-lg text-custPrimary">Kris Tenar Wiluan</h2>
             <p className="text-custBlack/70 text-sm md:text-base">Founder Citramas Group</p>
           </div>
         </div>

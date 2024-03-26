@@ -36,9 +36,13 @@ const ActivityMenu = ({ dataTab }: ActivityMenuProps) => {
     }
   }, [titleParams, dispatch]);
 
+  const sortedDataTab = dataTab.sort((a, b) => {
+    return a.name.localeCompare(b.name);
+  });
+
   return (
     <>
-      {dataTab.map((item, index) => {
+      {sortedDataTab.map((item, index) => {
         return (
           <CustTabActivity
             text={item.name}

@@ -13,7 +13,7 @@ export default async function Home() {
       <Navbar />
       <Hero />
       <About />
-      <Activity />
+      {/* <Activity /> */}
       <News />
       <Map />
     </main>
