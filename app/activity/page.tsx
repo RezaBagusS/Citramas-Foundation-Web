@@ -84,7 +84,6 @@ const dataTab = [
 const Page: React.FC = async () => {
   const dataTab = await prisma.activity.findMany();
   const dataActivityList = await prisma.listActivity.findMany();
-  const dataImage = await prisma.storageImage.findMany();
 
   return (
     <div className="w-full relative pt-[69px]">
@@ -119,7 +118,7 @@ const Page: React.FC = async () => {
         </div>
         <div className="col-span-12 md:col-span-9">
           {/* Galery List */}
-          <GalleryActivity dataActivityList={dataActivityList} dataImage={dataImage} />
+          <GalleryActivity dataActivityList={dataActivityList} />
         </div>
       </div>
     </div>

@@ -3,9 +3,11 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
-import getDataImage from "@/app/helpers/getDataImage";
 import { useDispatch } from "react-redux";
 import { setOpenImage } from "@/app/redux/slices/reduxOpenImageSlices";
+import prisma from "@/app/libs/prisma";
+import getDataImage from "@/app/helpers/getDataImage";
+
 
 interface GalleryActivityProps {
   dataActivityList: {
@@ -15,7 +17,6 @@ interface GalleryActivityProps {
     name: string;
     createdAt: Date;
   }[];
-  dataImage: DataImage[];
 }
 
 interface DataImage {
@@ -26,7 +27,7 @@ interface DataImage {
 }
 [];
 
-const GalleryActivity = ({ dataActivityList, dataImage }: GalleryActivityProps) => {
+const GalleryActivity = ({ dataActivityList }: GalleryActivityProps) => {
   const [loading, setLoading] = useState(true);
   const [filteredData, setFilteredData] = useState<DataImage[]>([]);
   const [desc, setDesc] = useState<string>("");
@@ -43,8 +44,9 @@ const GalleryActivity = ({ dataActivityList, dataImage }: GalleryActivityProps) 
       return item.name.replace(/ /g, "-").toLowerCase() == (itemParams ? itemParams : "eye-screening");
     });
 
-    const dataImageFilter = (id: number) => {
-      const data = dataImage.filter((item) => item.id_listActivity == id);
+    const dataImageFilter = async (id: number) => {
+
+      const data = await getDataImage(id);
   
       if (getActivityList.length > 0) {
         setDesc(getActivityList[0].description);
@@ -53,13 +55,12 @@ const GalleryActivity = ({ dataActivityList, dataImage }: GalleryActivityProps) 
       if (data.length > 0) {
         setFilteredData(data);
       }
-  
-      setLoading(false);
     }
-
-    titleParams
-      ? dataImageFilter(getActivityList[0].id)
-      : setLoading(false);
+    
+    titleParams && dataImageFilter(getActivityList[0].id)
+    
+    setLoading(false);
+ 
   }, [itemParams, titleParams]);
 
   const onClickImage = (url: string) => {
@@ -121,7 +122,7 @@ const GalleryActivity = ({ dataActivityList, dataImage }: GalleryActivityProps) 
                       <Image
                         src={data.url}
                         width={500}
-                        height={350}
+                        height={500}
                         className="h-full w-full object-cover object-center"
                         alt="MissingIMG"
                       />
