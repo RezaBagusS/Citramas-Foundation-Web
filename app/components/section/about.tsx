@@ -51,7 +51,7 @@ const About = () => {
         <div className="col-span-6 lg:col-span-3 grid gap-3 place-content-center">
           <Image src={pendiri} alt="hero" className="w-[120px] lg:w-[240px] mx-auto" />
           <div className="flex flex-col items-center w-fit mx-auto">
-            <h2 className="font-semibold text-sm md:text-lg text-custPrimary">Kris Tenar Wiluan</h2>
+            <h2 className="font-semibold text-sm md:text-lg text-custPrimary">Kris Taenar Wiluan</h2>
             <p className="text-custBlack/70 text-sm md:text-base">Founder Citramas Group</p>
           </div>
         </div>
