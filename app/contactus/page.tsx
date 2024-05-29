@@ -34,7 +34,7 @@ const Contactus: React.FC = () => {
                 </div>
               </div>
             </div>
-            {/* <div className="w-full flex items-center gap-5 p-5 bg-white border drop-shadow-sm">
+            <div className="w-full flex items-center gap-5 p-5 bg-white border drop-shadow-sm">
               <MdAttachEmail className="text-5xl text-custPrimary" />
               <div className="flex flex-col">
                 <h1 className="text-lg md:text-xl font-semibold text-custBlack">
@@ -50,7 +50,7 @@ const Contactus: React.FC = () => {
                   info@citramas-foundation.com
                 </a>
               </div>
-            </div> */}
+            </div>
           </div>
 
           {/* FORM */}

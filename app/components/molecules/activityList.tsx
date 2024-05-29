@@ -26,7 +26,7 @@ const ActivityList = ({ dataActivityList, dataTab }: ActivityListProps) => {
     useSearchParams().get("item") || ""
   );
 
-  const getItem = searchParams.get("item");
+  const getItem = searchParams.get("item") || "eye-screening";
 
   const getTab = dataTab.filter((item) => {
     return (

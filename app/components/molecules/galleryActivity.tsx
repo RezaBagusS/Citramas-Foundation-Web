@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { setOpenImage } from "@/app/redux/slices/reduxOpenImageSlices";
 import prisma from "@/app/libs/prisma";
@@ -33,34 +33,40 @@ const GalleryActivity = ({ dataActivityList }: GalleryActivityProps) => {
   const [desc, setDesc] = useState<string>("");
   const searchParams = useSearchParams();
   const dispatch = useDispatch();
+  const location = useRouter();
 
   const titleParams = searchParams.get("title");
   const itemParams = searchParams.get("item");
 
   useEffect(() => {
+    if (!titleParams && !itemParams) {
+      location.push("/activity?title=Health&item=eye-screening");
+    }
+  }, []);
+
+  useEffect(() => {
+
+    setLoading(true);
 
     const getActivityList = dataActivityList.filter((item) => {
-
-      return item.name.replace(/ /g, "-").toLowerCase() == (itemParams ? itemParams : "eye-screening");
+      return item.name.replace(/ /g, "-").toLowerCase() == (itemParams || "eye-screening");
     });
 
     const dataImageFilter = async (id: number) => {
 
       const data = await getDataImage(id);
-  
+
       if (getActivityList.length > 0) {
         setDesc(getActivityList[0].description);
       }
-  
+
       if (data.length > 0) {
         setFilteredData(data);
       }
     }
-    
-    titleParams && dataImageFilter(getActivityList[0].id)
-    
-    setLoading(false);
- 
+
+    titleParams && dataImageFilter(getActivityList[0].id).finally(() => setLoading(false));
+
   }, [itemParams, titleParams]);
 
   const onClickImage = (url: string) => {
@@ -78,11 +84,10 @@ const GalleryActivity = ({ dataActivityList }: GalleryActivityProps) => {
         Gallery :
         <span className="ms-2 text-sm font-normal text-gray-700">
           {`
-        ${
-          titleParams
-            ? `${titleParams} - ${itemParams?.replace(/-/g, " ")}`
-            : "Please select list activity first ..."
-        }
+        ${titleParams
+              ? `${titleParams} - ${itemParams?.replace(/-/g, " ")}`
+              : "Please select list activity first ..."
+            }
       `}
         </span>
       </h3>
@@ -102,15 +107,8 @@ const GalleryActivity = ({ dataActivityList }: GalleryActivityProps) => {
             <div className="bg-slate-400 my-2 md:my-0 animate-pulse w-full h-[350px]"></div>
             <div className="bg-slate-400 my-2 md:my-0 animate-pulse w-full h-[350px]"></div>
           </div>
-        ) : filteredData.length == 0 ? (
-          <div className="w-full py-10">
-            <p className="text-center text-gray-700 text-lg font-semibold">
-              image not found in this activity ...
-            </p>
-          </div>
-        ) : (
+        ) : filteredData.length > 0 ? (
           <>
-            <div className=""></div>
             <div className="columns-2 md:columns-3 lg:columns-4 mt-10">
               {filteredData.map((data) => {
                 return (
@@ -132,6 +130,12 @@ const GalleryActivity = ({ dataActivityList }: GalleryActivityProps) => {
               })}
             </div>
           </>
+        ) : (
+          <div className="w-full py-10">
+            <p className="text-center text-gray-700 text-lg font-semibold">
+              image not found in this activity ...
+            </p>
+          </div>
         )}
       </div>
     </>

@@ -29,8 +29,6 @@ const ActivityMenu = ({ dataTab }: ActivityMenuProps) => {
   };
 
   useEffect(() => {
-    console.log("Title : ", titleParams);
-
     if (titleParams) {
       dispatch(setActive({ show: titleParams }));
     }

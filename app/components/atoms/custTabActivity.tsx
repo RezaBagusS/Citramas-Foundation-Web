@@ -13,6 +13,7 @@ const CustTabActivity = ({
 }: CustTabActivityProps) => {
 
   const isSame = () => {
+    
     return isActive.replace(/ /g, "-").toLowerCase() === text.replace(/ /g, "-").toLowerCase();
   }
 
