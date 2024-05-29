@@ -6,10 +6,24 @@ import ActivityMenu from "../components/molecules/activityMenu";
 import ActivityList from "../components/molecules/activityList";
 import GalleryActivity from "../components/molecules/galleryActivity";
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
+import { useDispatch } from "react-redux";
+import { setKeyword } from "../redux/slices/reduxKeywordSearchSlices";
 
 const Page: React.FC = () => {
   const [dataTab, setDataTab] = useState([]);
   const [dataActivityList, setDataActivityList] = useState([]);
+  const path = usePathname();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+
+    dispatch(setKeyword({
+      keyword: ""
+    }))
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  }, [path]);
 
   useEffect(() => {
 
@@ -18,16 +32,16 @@ const Page: React.FC = () => {
       const getDataTab = fetch(`/api/v1/tabActivity`, {
         method: "GET",
         headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*",
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
         },
       });
 
       const getDataActivityList = fetch(`/api/v1/activityList`, {
         method: "GET",
         headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*",
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
         },
       });
 
@@ -56,7 +70,7 @@ const Page: React.FC = () => {
 
     fetchData();
 
-  },[]);
+  }, []);
 
   return (
     <div className="w-full relative pt-[69px]">
