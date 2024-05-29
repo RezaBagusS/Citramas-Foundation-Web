@@ -7,14 +7,14 @@ import ActivityList from "../components/molecules/activityList";
 import GalleryActivity from "../components/molecules/galleryActivity";
 import { useEffect, useState } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
+import { useSelector } from "react-redux";
 
 const Page: React.FC = () => {
   const [dataTab, setDataTab] = useState([]);
   const [dataActivityList, setDataActivityList] = useState([]);
   const path = usePathname();
 
-  const searchParams = useSearchParams();
-  const titleParams = searchParams.get("title");
+  const activeActivity = useSelector((state: any) => state.activeActivity.data.show);
 
   useEffect(() => {
 
@@ -38,7 +38,7 @@ const Page: React.FC = () => {
       console.log("done");
     });
 
-  }, [titleParams]);
+  }, [activeActivity]);
 
   useEffect(() => {
 
