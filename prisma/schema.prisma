@@ -11,8 +11,8 @@ model News {
   id          Int      @id @default(autoincrement())
   title       String
   description String
-  date        DateTime
-  createdAt   DateTime @default(now())
+  date        DateTime @db.Date
+  createdAt   DateTime @default(now()) @db.Date
   note        String?
   path        String
 }

@@ -34,6 +34,7 @@ const Page: React.FC = () => {
         headers: {
           "Content-Type": "application/json",
           "Access-Control-Allow-Origin": "*",
+          "Cache-Control": "no-cache",
         },
       });
 
@@ -42,6 +43,7 @@ const Page: React.FC = () => {
         headers: {
           "Content-Type": "application/json",
           "Access-Control-Allow-Origin": "*",
+          "Cache-Control": "no-cache",
         },
       });
 
