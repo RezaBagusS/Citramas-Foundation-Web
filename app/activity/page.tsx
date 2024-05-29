@@ -4,10 +4,8 @@ import CustBannerPage from "../components/atoms/custBannerPage";
 import banner from "@/app/assets/activity-activity.png";
 import ActivityMenu from "../components/molecules/activityMenu";
 import ActivityList from "../components/molecules/activityList";
-import prisma from "../libs/prisma";
 import GalleryActivity from "../components/molecules/galleryActivity";
 import { useEffect, useState } from "react";
-
 
 const Page: React.FC = () => {
   const [dataTab, setDataTab] = useState([]);
