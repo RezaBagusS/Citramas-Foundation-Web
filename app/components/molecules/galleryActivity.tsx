@@ -5,7 +5,6 @@ import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { setOpenImage } from "@/app/redux/slices/reduxOpenImageSlices";
-import prisma from "@/app/libs/prisma";
 import getDataImage from "@/app/helpers/getDataImage";
 
 
