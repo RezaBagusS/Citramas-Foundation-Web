@@ -6,62 +6,61 @@ import ActivityMenu from "../components/molecules/activityMenu";
 import ActivityList from "../components/molecules/activityList";
 import GalleryActivity from "../components/molecules/galleryActivity";
 import { useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
-import { useDispatch } from "react-redux";
-import { setKeyword } from "../redux/slices/reduxKeywordSearchSlices";
+import { usePathname, useSearchParams } from "next/navigation";
 
 const Page: React.FC = () => {
   const [dataTab, setDataTab] = useState([]);
   const [dataActivityList, setDataActivityList] = useState([]);
   const path = usePathname();
-  const dispatch = useDispatch();
+
+  const searchParams = useSearchParams();
+  const titleParams = searchParams.get("title");
 
   useEffect(() => {
 
-    const fetchData = () => {
+    const getDataActivityList = fetch(`/api/v1/activityList`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Cache-Control": "no-cache",
+      },
+    });
 
-      const getDataTab = fetch(`/api/v1/tabActivity`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*",
-          "Cache-Control": "no-cache",
-        },
-      });
+    getDataActivityList.then((res) => {
+      return res.json();
+    }).then((data) => {
+      console.log(data);
+      setDataActivityList(data.data);
+    }).catch((err) => {
+      console.log(err)
+    }).finally(() => {
+      console.log("done");
+    });
 
-      const getDataActivityList = fetch(`/api/v1/activityList`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*",
-          "Cache-Control": "no-cache",
-        },
-      });
+  }, [titleParams]);
 
-      getDataTab.then((res) => {
-        return res.json();
-      }).then((data) => {
-        console.log(data);
-        setDataTab(data.data);
-      }).catch((err) => {
-        console.log(err)
-      }).finally(() => {
-        console.log("done");
-      });
+  useEffect(() => {
 
-      getDataActivityList.then((res) => {
-        return res.json();
-      }).then((data) => {
-        console.log(data);
-        setDataActivityList(data.data);
-      }).catch((err) => {
-        console.log(err)
-      }).finally(() => {
-        console.log("done");
-      });
-    }
+    const getDataTab = fetch(`/api/v1/tabActivity`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Cache-Control": "no-cache",
+      },
+    });
 
-    fetchData();
+    getDataTab.then((res) => {
+      return res.json();
+    }).then((data) => {
+      console.log(data);
+      setDataTab(data.data);
+    }).catch((err) => {
+      console.log(err)
+    }).finally(() => {
+      console.log("done");
+    });
 
   }, [path]);
 
