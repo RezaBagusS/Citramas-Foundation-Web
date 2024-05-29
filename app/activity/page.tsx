@@ -18,15 +18,6 @@ const Page: React.FC = () => {
 
   useEffect(() => {
 
-    dispatch(setKeyword({
-      keyword: ""
-    }))
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-
-  }, [path]);
-
-  useEffect(() => {
-
     const fetchData = () => {
 
       const getDataTab = fetch(`/api/v1/tabActivity`, {
@@ -72,7 +63,7 @@ const Page: React.FC = () => {
 
     fetchData();
 
-  }, []);
+  }, [path]);
 
   return (
     <div className="w-full relative pt-[69px]">
