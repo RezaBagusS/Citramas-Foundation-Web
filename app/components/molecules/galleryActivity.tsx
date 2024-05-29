@@ -57,7 +57,7 @@ const GalleryActivity = ({ dataActivityList }: GalleryActivityProps) => {
       const data = await getDataImage(id);
 
       if (getActivityList.length > 0) {
-        setDesc(getActivityList[0].description);
+        setDesc(getActivityList[0]?.description);
       }
 
       if (data.length > 0) {
@@ -65,7 +65,7 @@ const GalleryActivity = ({ dataActivityList }: GalleryActivityProps) => {
       }
     }
 
-    titleParams && dataImageFilter(getActivityList[0].id).finally(() => setLoading(false));
+    titleParams && dataImageFilter(getActivityList[0]?.id).finally(() => setLoading(false));
 
   }, [itemParams, titleParams]);
 

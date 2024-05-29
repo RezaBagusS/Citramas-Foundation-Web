@@ -1,34 +1,64 @@
+'use client'
+
 import CustBannerPage from "../components/atoms/custBannerPage";
 import banner from "@/app/assets/activity-activity.png";
 import ActivityMenu from "../components/molecules/activityMenu";
 import ActivityList from "../components/molecules/activityList";
 import prisma from "../libs/prisma";
 import GalleryActivity from "../components/molecules/galleryActivity";
+import { useEffect, useState } from "react";
 
-async function getServerSideProps() {
-  const dataTab = await prisma.activity.findMany({
-    select: {
-      id: true,
-      name: true,
-      createdAt: true,
+
+const Page: React.FC = () => {
+  const [dataTab, setDataTab] = useState([]);
+  const [dataActivityList, setDataActivityList] = useState([]);
+
+  useEffect(() => {
+
+    const fetchData = () => {
+
+      const getDataTab = fetch(`/api/v1/tabActivity`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+        },
+      });
+
+      const getDataActivityList = fetch(`/api/v1/activityList`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+        },
+      });
+
+      getDataTab.then((res) => {
+        return res.json();
+      }).then((data) => {
+        console.log(data);
+        setDataTab(data.data);
+      }).catch((err) => {
+        console.log(err)
+      }).finally(() => {
+        console.log("done");
+      });
+
+      getDataActivityList.then((res) => {
+        return res.json();
+      }).then((data) => {
+        console.log(data);
+        setDataActivityList(data.data);
+      }).catch((err) => {
+        console.log(err)
+      }).finally(() => {
+        console.log("done");
+      });
     }
-  });
-  const dataActivityList = await prisma.listActivity.findMany({
-    select: {
-      id: true,
-      id_activity: true,
-      description: true,
-      name: true,
-      createdAt: true,
-    }
-  });
 
-  return { dataTab, dataActivityList };
-}
+    fetchData();
 
-const Page: React.FC = async () => {
-  
-  const { dataTab, dataActivityList } = await getServerSideProps();
+  },[]);
 
   return (
     <div className="w-full relative pt-[69px]">

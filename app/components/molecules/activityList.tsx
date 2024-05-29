@@ -55,7 +55,7 @@ const ActivityList = ({ dataActivityList, dataTab }: ActivityListProps) => {
 
           return (
             <a
-              href={`/activity?title=${getTab[0].name}&item=${lowerItem}`}
+              href={`/activity?title=${getTab[0]?.name}&item=${lowerItem}`}
               className={`cursor-pointer hover:text-gray-500 text-gray-800
               ${
                 getItem == lowerItem ? "font-semibold underline" : "font-normal"
@@ -84,7 +84,7 @@ const ActivityList = ({ dataActivityList, dataTab }: ActivityListProps) => {
           ))}
         </select>
         <a
-          href={`/activity?title=${getTab[0].name}&item=${selectedItem}`}
+          href={`/activity?title=${getTab[0]?.name}&item=${selectedItem}`}
           className="md:hidden w-fit text-sm sm:text-base py-1 px-3 mt-2 bg-custPrimary text-white"
         >
           Go
