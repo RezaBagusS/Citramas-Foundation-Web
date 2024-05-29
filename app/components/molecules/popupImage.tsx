@@ -32,7 +32,7 @@ const PopupImage = () => {
             className="text-3xl absolute top-4 right-8 bg-slate-200/30 hover:bg-slate-200/20 transition-all duration-200 flex justify-center items-center cursor-pointer w-10 h-10 rounded-full">
                 x
             </span>
-            <Image src={dataPopupImage.url} alt="image" height={100} width={400} className="w-auto h-full" />
+            <Image src={dataPopupImage.url} alt="image" height={100} width={400} className="w-fit h-fit" />
         </motion.div>
       </div>
     )

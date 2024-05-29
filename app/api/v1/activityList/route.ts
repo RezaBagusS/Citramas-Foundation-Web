@@ -1,8 +1,10 @@
 import { NextResponse } from "next/server";
 import prisma from "@/app/libs/prisma";
 
-export async function GET() {
+export async function POST(request: Request) {
     try {
+
+        const { active } = await request.json();
 
         const dataActivityList = await prisma.listActivity.findMany({
             select: {
@@ -10,6 +12,11 @@ export async function GET() {
                 id_activity: true,
                 description: true,
                 name: true,
+            }, 
+            where: {
+                activity: {
+                    name: active
+                }
             }
         });
 

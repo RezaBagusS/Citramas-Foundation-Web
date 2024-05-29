@@ -30,7 +30,7 @@ const ActivityMenu = ({ dataTab }: ActivityMenuProps) => {
     if (titleParams) {
       dispatch(setActive({ show: titleParams }));
     }
-  }, [titleParams, dispatch]);
+  }, [titleParams]);
 
   const sortedDataTab = dataTab.sort((a, b) => {
     return a.name.localeCompare(b.name);

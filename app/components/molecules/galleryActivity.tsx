@@ -6,27 +6,15 @@ import { setOpenImage } from "@/app/redux/slices/reduxOpenImageSlices";
 import getDataImage from "@/app/helpers/getDataImage";
 
 
-interface GalleryActivityProps {
-  dataActivityList: {
-    id: number;
-    id_activity: number;
-    description: string;
-    name: string;
-    createdAt: Date;
-  }[];
-}
-
 interface DataImage {
   id: number;
   id_listActivity: number;
   url: string;
-  createdAt: Date;
 }
-[];
 
-const GalleryActivity = ({ dataActivityList }: GalleryActivityProps) => {
+const GalleryActivity = () => {
   const [loading, setLoading] = useState(true);
-  const [filteredData, setFilteredData] = useState<DataImage[]>([]);
+  const [dataImage, setDataImage] = useState<DataImage[]>([]);
   const [desc, setDesc] = useState<string>("");
   const searchParams = useSearchParams();
   const dispatch = useDispatch();
@@ -36,44 +24,41 @@ const GalleryActivity = ({ dataActivityList }: GalleryActivityProps) => {
   const itemParams = searchParams.get("item");
 
   useEffect(() => {
-    if (!titleParams && !itemParams) {
+    if (!itemParams) {
       location.push("/activity?title=Health&item=eye-screening");
     }
-  }, []);
-
-  useEffect(() => {
 
     setLoading(true);
 
-    const getActivityList = dataActivityList.filter((item) => {
-      return item.name.replace(/ /g, "-").toLowerCase() == (itemParams || "eye-screening");
+    const getImageActivityList = fetch(`/api/v1/imageActivity`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Cache-Control": "no-cache",
+      },
+      body: JSON.stringify({
+        item: itemParams,
+      }),
     });
 
-    const dataImageFilter = async (id: number) => {
-
-      const data = await getDataImage(id);
-
-      if (getActivityList.length > 0) {
-        setDesc(getActivityList[0]?.description);
-      }
-
-      if (data.length > 0) {
-        setFilteredData(data);
-      }
-    }
-
-    titleParams && dataImageFilter(getActivityList[0]?.id).finally(() => setLoading(false));
-
-  }, [itemParams, titleParams]);
+    getImageActivityList.then((res) => {
+      return res.json();
+    }).then((data) => {
+      setDataImage(data.data);
+      setDesc(data.desc);
+    }).catch((err) => {
+      console.log(err)
+    }).finally(() => {
+      setTimeout(() => {
+        setLoading(false);
+      }, 1000);
+    });
+  }, [itemParams]);
 
   const onClickImage = (url: string) => {
-    dispatch(
-      setOpenImage({
-        show: true,
-        url: url,
-      })
-    );
-  };
+    dispatch(setOpenImage({ show: true, url: url }));
+  }
 
   return (
     <>
@@ -104,10 +89,10 @@ const GalleryActivity = ({ dataActivityList }: GalleryActivityProps) => {
             <div className="bg-slate-400 my-2 md:my-0 animate-pulse w-full h-[350px]"></div>
             <div className="bg-slate-400 my-2 md:my-0 animate-pulse w-full h-[350px]"></div>
           </div>
-        ) : filteredData.length > 0 ? (
+        ) : dataImage.length > 0 ? (
           <>
             <div className="columns-2 md:columns-3 lg:columns-4 mt-10">
-              {filteredData.map((data) => {
+              {dataImage.map((data) => {
                 return (
                   <div key={data.id} className="py-2">
                     <div
