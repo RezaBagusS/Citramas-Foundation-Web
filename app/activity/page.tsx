@@ -7,16 +7,24 @@ import ActivityList from "../components/molecules/activityList";
 import GalleryActivity from "../components/molecules/galleryActivity";
 import SkeletonTab from "../components/molecules/skeletonTab";
 import { useEffect, useState } from "react";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 const Page: React.FC = () => {
   const [dataTab, setDataTab] = useState([]);
   const [loading, setLoading] = useState(true);
   const path = usePathname();
 
+  const location = useRouter();
+  const searchParams = useSearchParams();
+  const itemParams = searchParams.get("item");
+
   useEffect(() => {
 
     setLoading(true);
+
+    if (!itemParams) {
+      location.push("/activity?title=Health&item=eye-screening");
+    }
 
     const getDataTab = fetch(`/api/v1/tabActivity`, {
       method: "GET",

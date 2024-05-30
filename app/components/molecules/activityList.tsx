@@ -36,10 +36,13 @@ const ActivityList = () => {
     });
 
     getDataActivityList.then((res) => {
+      if (!res.ok) {
+        console.log("Error: ", res.statusText);
+      }
       return res.json();
     }).then((data) => {
-      data.data && setSelectedItem(data.data[0].name.replace(/ /g, "-").toLowerCase());
-      setDataActivityList(data.data);
+      data.data && setSelectedItem(data.data[0].name.replace(/ /g, "-").toLowerCase())
+      setDataActivityList(data.data || []);
     }).catch((err) => {
       console.log(err)
     }).finally(() => {
@@ -48,18 +51,11 @@ const ActivityList = () => {
       }, 1000);
     });
 
-    
-
   }, [active]);
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedItem(e.target.value)
   };
-
-  useEffect(() => {
-    console.log(selectedItem);
-    
-  }, [selectedItem]);
 
   const generateSlugActive = active.replace(/ /g, "-").toLowerCase();
 

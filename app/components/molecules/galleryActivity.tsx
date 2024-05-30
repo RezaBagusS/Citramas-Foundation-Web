@@ -24,10 +24,6 @@ const GalleryActivity = () => {
   const itemParams = searchParams.get("item");
 
   useEffect(() => {
-    if (!itemParams) {
-      location.push("/activity?title=Health&item=eye-screening");
-    }
-
     setLoading(true);
 
     const getImageActivityList = fetch(`/api/v1/imageActivity`, {
@@ -45,7 +41,7 @@ const GalleryActivity = () => {
     getImageActivityList.then((res) => {
       return res.json();
     }).then((data) => {
-      setDataImage(data.data);
+      setDataImage(data.data || []);
       setDesc(data.desc);
     }).catch((err) => {
       console.log(err)
