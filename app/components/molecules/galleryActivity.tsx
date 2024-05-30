@@ -123,7 +123,7 @@ const GalleryActivity = () => {
               })}
             </div>
           </>
-        ) : statusCode > 500 ? (
+        ) : statusCode >= 500 ? (
           <div className="w-full py-10 grid place-content-center">
             <button
               onClick={() => setRefresh(true)}
