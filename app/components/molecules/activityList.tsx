@@ -49,6 +49,7 @@ const ActivityList = () => {
     }).finally(() => {
       setTimeout(() => {
         setLoading(false);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       }, 1000);
     });
 
@@ -80,8 +81,9 @@ const ActivityList = () => {
                     const lowerItem = item.name.replace(/ /g, "-").toLowerCase();
 
                     return (
-                      <a
-                        href={`/activity?title=${generateSlugActive}&item=${lowerItem}`}
+                      <span
+                        // href={`?title=${generateSlugActive}&item=${lowerItem}`}
+                        onClick={() => location.push('/activity?title=' + generateSlugActive + '&item=' + lowerItem)}
                         className={`cursor-pointer hover:text-gray-500 text-gray-800
                             ${itemSearch == lowerItem ? "font-semibold underline" : "font-normal"
                           }
@@ -89,7 +91,7 @@ const ActivityList = () => {
                         key={index}
                       >
                         {item.name}
-                      </a>
+                      </span>
                     );
                   })}
             </div>
