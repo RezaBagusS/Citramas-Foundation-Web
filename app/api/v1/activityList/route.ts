@@ -1,10 +1,30 @@
 import { NextResponse } from "next/server";
 import prisma from "@/app/libs/prisma";
+import { get } from "https";
 
 export async function POST(request: Request) {
     try {
 
         const { active } = await request.json();
+
+        const tabActivity = await prisma.activity.findMany({
+            select: {
+                id: true,
+                name: true,
+            }
+        });
+
+        const getTab = tabActivity.filter((item) => {
+            return item.name.toLowerCase() == active.split("-").join(" ").toLowerCase();
+        });
+
+        if (getTab.length == 0) {
+            return NextResponse.json({
+                error: false,
+                message: "Data activity not found",
+                data: []
+            }, { status: 404 })
+        }
 
         const dataActivityList = await prisma.listActivity.findMany({
             select: {
@@ -14,9 +34,7 @@ export async function POST(request: Request) {
                 name: true,
             }, 
             where: {
-                activity: {
-                    name: active
-                }
+                id_activity: getTab[0].id
             }
         });
 

@@ -17,6 +17,7 @@ const ActivityList = () => {
   const [loading, setLoading] = useState(true);
   const location = useRouter();
 
+  let titleSearch = useSearchParams().get("title");
   let itemSearch = useSearchParams().get("item");
 
   useEffect(() => {
@@ -51,7 +52,7 @@ const ActivityList = () => {
       }, 1000);
     });
 
-  }, [active]);
+  }, [active, titleSearch]);
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedItem(e.target.value)
@@ -71,22 +72,26 @@ const ActivityList = () => {
         ) : (
           <>
             <div className="hidden md:flex flex-col gap-4 text-xs md:text-sm p-3">
-              {dataActivityList.map((item, index) => {
-                const lowerItem = item.name.replace(/ /g, "-").toLowerCase();
+              {
+                dataActivityList && dataActivityList.length == 0 ? (
+                  <p className="text-gray-500">Data activity not found</p>
+                ) :
+                  dataActivityList.map((item, index) => {
+                    const lowerItem = item.name.replace(/ /g, "-").toLowerCase();
 
-                return (
-                  <a
-                    href={`/activity?title=${generateSlugActive}&item=${lowerItem}`}
-                    className={`cursor-pointer hover:text-gray-500 text-gray-800
-              ${itemSearch == lowerItem ? "font-semibold underline" : "font-normal"
-                      }
-            `}
-                    key={index}
-                  >
-                    {item.name}
-                  </a>
-                );
-              })}
+                    return (
+                      <a
+                        href={`/activity?title=${generateSlugActive}&item=${lowerItem}`}
+                        className={`cursor-pointer hover:text-gray-500 text-gray-800
+                            ${itemSearch == lowerItem ? "font-semibold underline" : "font-normal"
+                          }
+                        `}
+                        key={index}
+                      >
+                        {item.name}
+                      </a>
+                    );
+                  })}
             </div>
             <div className="md:hidden flex gap-2">
               <select
@@ -94,14 +99,20 @@ const ActivityList = () => {
                 className="w-full text-sm sm:text-base p-1 mt-2"
                 onChange={handleChange}
               >
-                {dataActivityList.map((item, index) => (
-                  <option
-                    key={index}
-                    value={item.name.replace(/ /g, "-").toLowerCase()}
-                  >
-                    {item.name}
-                  </option>
-                ))}
+                {
+                  dataActivityList && dataActivityList.length == 0 ? (
+                    <option value="" disabled>
+                      Data activity not found
+                    </option>
+                  ) :
+                    dataActivityList.map((item, index) => (
+                      <option
+                        key={index}
+                        value={item.name.replace(/ /g, "-").toLowerCase()}
+                      >
+                        {item.name}
+                      </option>
+                    ))}
                 <option value="" disabled>
                   Select Activity
                 </option>

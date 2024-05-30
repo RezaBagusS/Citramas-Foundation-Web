@@ -15,6 +15,8 @@ interface DataImage {
 const GalleryActivity = () => {
   const [loading, setLoading] = useState(true);
   const [dataImage, setDataImage] = useState<DataImage[]>([]);
+  const [statusCode, setStatusCode] = useState<number>(0);
+  const [refresh, setRefresh] = useState<boolean>(false);
   const [desc, setDesc] = useState<string>("");
   const searchParams = useSearchParams();
   const dispatch = useDispatch();
@@ -39,6 +41,7 @@ const GalleryActivity = () => {
     });
 
     getImageActivityList.then((res) => {
+      setStatusCode(res.status)
       return res.json();
     }).then((data) => {
       setDataImage(data.data || []);
@@ -48,9 +51,10 @@ const GalleryActivity = () => {
     }).finally(() => {
       setTimeout(() => {
         setLoading(false);
+        setRefresh(false);
       }, 1000);
     });
-  }, [itemParams]);
+  }, [itemParams, refresh]);
 
   const onClickImage = (url: string) => {
     dispatch(setOpenImage({ show: true, url: url }));
@@ -108,13 +112,23 @@ const GalleryActivity = () => {
               })}
             </div>
           </>
-        ) : (
-          <div className="w-full py-10">
-            <p className="text-center text-gray-700 text-lg font-semibold">
-              image not found in this activity ...
-            </p>
+        ) : statusCode == 500 ? (
+          <div className="w-full py-10 grid place-content-center">
+            <button
+              onClick={() => setRefresh(true)}
+              className="mt-5 bg-custPrimary text-white px-3 py-1 rounded-md hover:bg-custPrimaryDark transition-all duration-200"
+            >
+              Refresh ...
+            </button>
           </div>
-        )}
+        ) :
+          (
+            <div className="w-full py-10">
+              <p className="text-center text-gray-700 text-lg font-semibold">
+                image not found in this activity ...
+              </p>
+            </div>
+          )}
       </div>
     </>
   );

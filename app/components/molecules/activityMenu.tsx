@@ -15,24 +15,22 @@ interface ActivityMenuProps {
 }
 
 const ActivityMenu = ({ dataTab }: ActivityMenuProps) => {
-  const dispatch = useDispatch();
   let active = useSelector((state: any) => state.activeActivity.data.show);
-
+  
   const searchParams = useSearchParams();
-
+  
   const titleParams = searchParams.get("title");
-
+  
+  const dispatch = useDispatch();
   const handleActive = (title: string) => {
     dispatch(setActive({ show: title }));
   };
 
   useEffect(() => {
-    if (titleParams) {
-      dispatch(setActive({ show: titleParams }));
-    }
+    titleParams ? handleActive(titleParams) : handleActive("Health");
   }, [titleParams]);
 
-  const sortedDataTab = dataTab.sort((a, b) => {
+  const sortedDataTab = dataTab && dataTab.sort((a, b) => {
     return a.name.localeCompare(b.name);
   });
 
