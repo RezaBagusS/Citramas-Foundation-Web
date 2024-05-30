@@ -53,7 +53,7 @@ const ActivityList = () => {
       }, 1000);
     });
 
-  }, [active, titleSearch]);
+  }, [active]);
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedItem(e.target.value)
