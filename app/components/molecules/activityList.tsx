@@ -12,7 +12,7 @@ interface dataActivityListState {
 
 const ActivityList = () => {
   const [dataActivityList, setDataActivityList] = useState<dataActivityListState[]>([]);
-  const [selectedItem, setSelectedItem] = useState<string>(useSearchParams().get("item") || "eye-screening");
+  const [selectedItem, setSelectedItem] = useState<string>(useSearchParams().get("item") || "");
   const active = useSelector((state: any) => state.activeActivity.data.show);
   const [loading, setLoading] = useState(true);
   const location = useRouter();

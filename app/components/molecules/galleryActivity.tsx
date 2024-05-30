@@ -89,7 +89,7 @@ const GalleryActivity = () => {
             <div className="bg-slate-400 my-2 md:my-0 animate-pulse w-full h-[350px]"></div>
             <div className="bg-slate-400 my-2 md:my-0 animate-pulse w-full h-[350px]"></div>
           </div>
-        ) : dataImage.length > 0 ? (
+        ) : dataImage && dataImage.length > 0 ? (
           <>
             <div className="columns-2 md:columns-3 lg:columns-4 mt-10">
               {dataImage.map((data) => {
