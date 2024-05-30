@@ -26,6 +26,11 @@ const GalleryActivity = () => {
   const itemParams = searchParams.get("item");
 
   useEffect(() => {
+
+    if (!itemParams) {
+      return;
+    }
+
     setLoading(true);
 
     const getImageActivityList = fetch(`/api/v1/imageActivity`, {
