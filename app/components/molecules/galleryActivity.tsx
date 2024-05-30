@@ -27,7 +27,7 @@ const GalleryActivity = () => {
 
   useEffect(() => {
 
-    if (!itemParams) {
+    if (!itemParams || !titleParams) {
       return;
     }
 
@@ -59,7 +59,7 @@ const GalleryActivity = () => {
         setRefresh(false);
       }, 1000);
     });
-  }, [itemParams, refresh]);
+  }, [itemParams, titleParams, refresh]);
 
   const onClickImage = (url: string) => {
     dispatch(setOpenImage({ show: true, url: url }));
@@ -81,7 +81,13 @@ const GalleryActivity = () => {
       {desc && (
         <div className="w-full flex-col gap-1 p-3 flex items-start justify-center border-b-2">
           <h5 className="text-sm text-justify font-medium text-gray800">Description :</h5>
-          <p className="text-sm text-justify text-gray-600">{desc}</p>
+          {
+            loading ? (
+              <div className="animate-pulse w-full h-5 bg-slate-400"></div>
+            ) : (
+              <p className="text-sm text-justify text-gray-600">{desc}</p>
+            )
+          }
         </div>
       )}
       <div className="w-full h-full">
