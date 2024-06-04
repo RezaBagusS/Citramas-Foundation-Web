@@ -42,8 +42,13 @@ const ActivityList = () => {
       }
       return res.json();
     }).then((data) => {
-      data.data && setSelectedItem(data.data[0].name.replace(/ /g, "-").toLowerCase())
-      setDataActivityList(data.data || []);
+      if (data.data) {
+        const sortedData = data.data.sort((a:any, b:any) => a.name.localeCompare(b.name));
+        setSelectedItem(sortedData[0].name.replace(/ /g, "-").toLowerCase())
+        setDataActivityList(sortedData);
+      } else {
+        setDataActivityList([]);
+      }
     }).catch((err) => {
       console.log(err)
     }).finally(() => {

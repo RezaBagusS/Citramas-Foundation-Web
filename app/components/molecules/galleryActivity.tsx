@@ -67,7 +67,7 @@ const GalleryActivity = () => {
 
   return (
     <>
-      <h3 className="p-3 border-b-2 text-lg font-medium">
+      {/* <h3 className="p-3 border-b-2 text-lg font-medium">
         Gallery :
         <span className="ms-2 text-sm font-normal text-gray-700">
           {`
@@ -77,7 +77,7 @@ const GalleryActivity = () => {
             }
       `}
         </span>
-      </h3>
+      </h3> */}
       {desc && (
         <div className="w-full flex-col gap-1 p-3 flex items-start justify-center border-b-2">
           <h5 className="text-sm text-justify font-medium text-gray800">Description :</h5>
