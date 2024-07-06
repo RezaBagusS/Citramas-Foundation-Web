@@ -1,7 +1,7 @@
 'use server'
 
 import CustBannerPage from "../components/atoms/custBannerPage";
-import banner from "@/app/assets/reporter-news.png";
+import banner from "@/app/assets/news-banner.webp";
 import Calendar from "../components/molecules/calendar";
 import LeftSide from "./leftside";
 import prisma from  "@/app/libs/prisma"

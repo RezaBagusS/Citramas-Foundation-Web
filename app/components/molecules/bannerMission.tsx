@@ -3,11 +3,11 @@ import CustBannerMission from "../atoms/custBannerMission";
 const dataBannerMission = [
   {
     title: "Our Vision",
-    desc: "Organizing social welfare programs in the education sector; health; social; and sports development."
+    desc: "To improve and elevate the livelihood of the community in Batam"
   },
   {
     title: "Our Mission",
-    desc: "Create sustainable programs to improve the standard of living environment and create jobs that encourage individuals to improve their skills."
+    desc: "Creating sustainable programs in areas of education; healthcare; social and sports development"
   },
 ];
 

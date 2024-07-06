@@ -3,7 +3,7 @@ import { BsFillTelephoneFill } from "react-icons/bs";
 import { MdAttachEmail } from "react-icons/md";
 import { BsBank2 } from "react-icons/bs";
 import FormContact from "../components/section/formContact";
-import banner from "@/app/assets/cs-contact.png";
+import banner from "@/app/assets/contact-banner.webp";
 
 const Contactus: React.FC = () => {
   return (
