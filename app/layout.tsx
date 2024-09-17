@@ -4,6 +4,7 @@ import "./globals.css";
 import MainKonten from "./libs/mainKonten";
 import Footer from "./components/section/footer";
 import PopupImage from "./components/molecules/popupImage";
+import HandleRedux from "./libs/HandleRedux";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -57,11 +58,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${poppins.className} max-w-[1400px] mx-auto`}>
-          <MainKonten>
-            <PopupImage />
+        <MainKonten>
+          <PopupImage />
+          <HandleRedux>
             {children}
-            <Footer />
-          </MainKonten>
+          </HandleRedux>
+          <Footer />
+        </MainKonten>
       </body>
     </html>
   );

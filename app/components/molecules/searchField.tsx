@@ -8,7 +8,7 @@ const SearchField = () => {
   const dispatch = useDispatch();
 
   const handleSearch = (e: any) => {
-    console.log(e.target.value);
+    // console.log(e.target.value);
     setTimeout(() => {
       dispatch(setKeyword({ keyword: e.target.value }));
     }, 1000);

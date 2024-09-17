@@ -2,8 +2,9 @@
 
 import SearchField from "../components/molecules/searchField";
 import CustListNews from "../components/atoms/custListNews";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
+import { setKeyword } from "../redux/slices/reduxKeywordSearchSlices";
 
 interface LeftSideProps {
   data: {
@@ -20,7 +21,7 @@ const LeftSide = ({ data }: LeftSideProps) => {
     const keyword = useSelector((state: any) => state.keywordSearch.data.keyword);
     const [filteredData, setFilteredData] = useState<any[]>([]); 
     const [showMore, setShowMore] = useState(false); 
-  
+
     const handleShowMore = () => {
       setShowMore((prevShowMore) => !prevShowMore); 
     };

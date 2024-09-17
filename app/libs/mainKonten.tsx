@@ -1,17 +1,18 @@
 'use client'
 
-import { Provider } from "react-redux";
+import { Provider, useDispatch } from "react-redux";
 import store from "../redux/store";
 import NavbarScroll from "../components/molecules/navbarScroll";
-import { Suspense } from "react";
+import { Suspense, useEffect } from "react";
 import Toaster from "../components/molecules/toaster";
 import MobileMenu from "../components/molecules/mobileMenu";
 
 interface MainKontenProps {
     children: React.ReactNode;
-  }
+}
 
 export default function MainKonten<FC>({ children }: MainKontenProps) {
+
     return (
         <Provider store={store}>
             <MobileMenu />

@@ -4,25 +4,32 @@ import prisma from "@/app/libs/prisma";
 export async function GET() {
     try {
 
-        const dataTab = await prisma.activity.findMany({
+        const listNews = await prisma.news.findMany({
+            orderBy: {
+                date: 'desc',
+            },
             select: {
                 id: true,
-                name: true,
+                title: true,
+                description: true,
+                date: true,
+                note: true,
+                path: true,
             }
-        });
+        })
 
-        if (dataTab.length == 0) {
+        if (listNews.length == 0) {
             return NextResponse.json({
                 error: false,
-                message: "Data tab activity not found",
+                message: "Data news not found",
                 data: []
             }, { status: 200 })
         }
 
         return NextResponse.json({
             error: false,
-            message: "Success get data tab activity",
-            data: dataTab
+            message: "Success get list news",
+            data: listNews
         }, { status: 200 });
 
     } catch (error: any) {
