@@ -4,7 +4,7 @@ import "./globals.css";
 import MainKonten from "./libs/mainKonten";
 import Footer from "./components/section/footer";
 import PopupImage from "./components/molecules/popupImage";
-import HandleRedux from "./libs/HandleRedux";
+import HandleRedux from "./libs/handleRedux";
 
 const poppins = Poppins({
   subsets: ["latin"],
