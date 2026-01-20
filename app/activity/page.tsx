@@ -7,45 +7,51 @@ import ActivityList from "../components/molecules/activityList";
 import GalleryActivity from "../components/molecules/galleryActivity";
 import SkeletonTab from "../components/molecules/skeletonTab";
 import { useEffect, useState } from "react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const Page: React.FC = () => {
   const [dataTab, setDataTab] = useState([]);
   const [loading, setLoading] = useState(true);
-  const path = usePathname();
 
-  const location = useRouter();
+  const router = useRouter();
   const searchParams = useSearchParams();
-  const itemParams = searchParams.get("item");
+  const titleParam = searchParams.get("title");
 
+  // 1. Fetch Data Tab
   useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        const res = await fetch(`/api/v1/tabActivity`);
+        const data = await res.json();
+        setDataTab(data.data || []);
 
-    setLoading(true);
+        // 2. Logic Redirect Default (Hanya jika tidak ada params sama sekali)
+        // Pindahkan logic redirect ke sini setelah data didapat (opsional) 
+        // atau biarkan di useEffect terpisah tapi pastikan params kosong.
+        if (!titleParam && data.data && data.data.length > 0) {
+          // Contoh: Default ke tab pertama jika ada
+          const defaultTitle = data.data[0].name;
+          // router.replace(...) lebih baik daripada push untuk default redirect
+        }
 
-    if (!itemParams) {
-      location.push("/activity?title=Health&item=eye-screening");
+      } catch (err) {
+        console.error("Failed to fetch tabs:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []); // Run once on mount
+
+  // Redirect safety check
+  useEffect(() => {
+    if (!searchParams.has("title") && !loading) {
+      // Default Hardcoded (Sesuai kode lama anda)
+      router.replace("/activity?title=Health&item=eye-screening");
     }
-
-    const getDataTab = fetch(`/api/v1/tabActivity`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-        "Cache-Control": "no-cache",
-      },
-    });
-
-    getDataTab.then((res) => {
-      return res.json();
-    }).then((data) => {
-      setDataTab(data.data);
-    }).catch((err) => {
-      console.log(err)
-    }).finally(() => {
-      setLoading(false);
-    });
-
-  }, [path]);
+  }, [searchParams, loading, router]);
 
   return (
     <div className="w-full relative pt-[69px]">
@@ -58,39 +64,24 @@ const Page: React.FC = () => {
 
         {/* Activity Menu PC */}
         <div className="absolute z-30 -bottom-12 right-1/2 translate-x-1/2 cust-container hidden sm:grid grid-cols-2 md:grid-cols-4 gap-3 py-5">
-          {
-            loading ? (
-              <SkeletonTab />
-            ) : (
-              <ActivityMenu dataTab={dataTab} />
-            )
-          }
+          {loading ? <SkeletonTab /> : <ActivityMenu dataTab={dataTab} />}
         </div>
-
       </div>
+
       <div className="cust-container pt-8 md:pt-14 pb-16 grid grid-cols-12 gap-5">
         {/* Activity Menu Mobile */}
         <div className="col-span-12 sm:hidden grid grid-cols-2 gap-3">
-          {
-            loading ? (
-              <SkeletonTab />
-            ) : (
-              <ActivityMenu dataTab={dataTab} />
-            )
-          }
+          {loading ? <SkeletonTab /> : <ActivityMenu dataTab={dataTab} />}
         </div>
 
-        <div className="col-span-12 md:col-span-3 bg-slate-100 rounded-sm sm:mt-8">
-          <h3 className="p-3 border-b-2 text-lg font-medium">
+        <div className="col-span-12 md:col-span-3 bg-slate-50 rounded-sm sm:mt-8 h-fit shadow-sm border border-slate-100">
+          <h3 className="p-3 border-b-2 border-slate-200 text-lg font-medium text-gray-800">
             List Of Activity
           </h3>
-
-          {/* Activity List */}
-          <ActivityList
-          />
+          <ActivityList />
         </div>
+
         <div className="col-span-12 md:col-span-9">
-          {/* Galery List */}
           <GalleryActivity />
         </div>
       </div>

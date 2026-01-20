@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo } from "react";
 import { useSearchParams } from "next/navigation";
 import CustTabActivity from "../atoms/custTabActivity";
 import { setActive } from "@/app/redux/slices/reduxActiveActivitySlices";
@@ -15,37 +15,39 @@ interface ActivityMenuProps {
 }
 
 const ActivityMenu = ({ dataTab }: ActivityMenuProps) => {
-  let active = useSelector((state: any) => state.activeActivity.data.show);
-  
+  const active = useSelector((state: any) => state.activeActivity.data.show);
   const searchParams = useSearchParams();
-  
   const titleParams = searchParams.get("title");
-  
   const dispatch = useDispatch();
+
+  // Sync Redux dengan URL Params
+  useEffect(() => {
+    if (titleParams) {
+      dispatch(setActive({ show: titleParams }));
+    }
+  }, [titleParams, dispatch]);
+
   const handleActive = (title: string) => {
     dispatch(setActive({ show: title }));
+    // Note: Anda mungkin perlu menambahkan router.push disini jika CustTabActivity tidak mengubah URL
   };
 
-  useEffect(() => {
-    titleParams ? handleActive(titleParams) : handleActive("Health");
-  }, [titleParams]);
-
-  const sortedDataTab = dataTab && dataTab.sort((a, b) => {
-    return a.name.localeCompare(b.name);
-  });
+  // ✅ Optimasi: useMemo untuk sorting
+  const sortedDataTab = useMemo(() => {
+    if (!dataTab) return [];
+    return [...dataTab].sort((a, b) => a.name.localeCompare(b.name));
+  }, [dataTab]);
 
   return (
     <>
-      {sortedDataTab.map((item, index) => {
-        return (
-          <CustTabActivity
-            text={item.name}
-            isActive={active}
-            handleActive={handleActive}
-            key={index}
-          />
-        );
-      })}
+      {sortedDataTab.map((item, index) => (
+        <CustTabActivity
+          text={item.name}
+          isActive={active}
+          handleActive={handleActive}
+          key={item.id || index} // Gunakan ID jika ada
+        />
+      ))}
     </>
   );
 };

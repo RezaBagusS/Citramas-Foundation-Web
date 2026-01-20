@@ -1,7 +1,6 @@
 import { useRouter, useSearchParams } from "next/navigation";
-import React, { useEffect } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { useSelector } from "react-redux";
-import { useState } from "react";
 
 interface dataActivityListState {
   id: number;
@@ -12,130 +11,140 @@ interface dataActivityListState {
 
 const ActivityList = () => {
   const [dataActivityList, setDataActivityList] = useState<dataActivityListState[]>([]);
-  const [selectedItem, setSelectedItem] = useState<string>(useSearchParams().get("item") || "");
-  const active = useSelector((state: any) => state.activeActivity.data.show);
   const [loading, setLoading] = useState(true);
-  const location = useRouter();
 
-  let titleSearch = useSearchParams().get("title");
-  let itemSearch = useSearchParams().get("item");
+  // Mengambil state dari URL dan Redux
+  const active = useSelector((state: any) => state.activeActivity.data.show);
+  const searchParams = useSearchParams();
+  const itemSearch = searchParams.get("item");
+  const router = useRouter();
 
+  // Fetch Data List Activity
   useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        const res = await fetch(`/api/v1/activityList`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ active: active }),
+        });
 
-    setLoading(true);
+        const data = await res.json();
 
-    const getDataActivityList = fetch(`/api/v1/activityList`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-        "Cache-Control": "no-cache",
-      },
-      body: JSON.stringify({
-        active: active,
-      }),
-    });
+        if (data.data && Array.isArray(data.data)) {
+          // Sort data di sini atau gunakan useMemo nanti. 
+          // Kita sort disini agar logic redirect di bawahnya akurat ambil index[0]
+          const sorted = data.data.sort((a: any, b: any) => a.name.localeCompare(b.name));
+          setDataActivityList(sorted);
 
-    getDataActivityList.then((res) => {
-      if (!res.ok) {
-        console.log("Error: ", res.statusText);
-      }
-      return res.json();
-    }).then((data) => {
-      if (data.data) {
-        const sortedData = data.data.sort((a:any, b:any) => a.name.localeCompare(b.name));
-        setSelectedItem(sortedData[0].name.replace(/ /g, "-").toLowerCase())
-        setDataActivityList(sortedData);
-      } else {
-        setDataActivityList([]);
-      }
-    }).catch((err) => {
-      console.log(err)
-    }).finally(() => {
-      setTimeout(() => {
+          // ✅ Logic Auto-Select Item Pertama
+          // Hanya redirect jika TIDAK ADA item di URL, tapi listnya ada isinya
+          if (!itemSearch && sorted.length > 0) {
+            const firstItemSlug = sorted[0].name.replace(/ /g, "-").toLowerCase();
+            const slugActive = active.replace(/ /g, "-").toLowerCase();
+            router.replace(`/activity?title=${slugActive}&item=${firstItemSlug}`);
+          }
+        } else {
+          setDataActivityList([]);
+        }
+
+      } catch (err) {
+        console.error("Error fetching activity list:", err);
+      } finally {
+        // ❌ Hapus setTimeout agar responsif
         setLoading(false);
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }, 1000);
-    });
+      }
+    };
 
-  }, [active]);
+    if (active) {
+      fetchData();
+    }
+  }, [active]); // Hapus dependency router/searchParams untuk fetch agar tidak loop
 
-  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedItem(e.target.value)
+  const generateSlugActive = active ? active.replace(/ /g, "-").toLowerCase() : "";
+
+  // Helper change URL
+  const handleChangePage = (itemName: string) => {
+    const slugItem = itemName.replace(/ /g, "-").toLowerCase();
+    router.push(`/activity?title=${generateSlugActive}&item=${slugItem}`);
+    // ❌ Hapus window.scrollTo agar UX mobile lebih nyaman
   };
 
-  const generateSlugActive = active.replace(/ /g, "-").toLowerCase();
+  const handleChangeSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    handleChangePage(e.target.value); // Value option sebaiknya nama asli atau slug konsisten
+  };
+
+  // Tentukan selected item untuk dropdown
+  // Cari item yang slug-nya cocok dengan itemSearch
+  const currentSelectedName = useMemo(() => {
+    if (!itemSearch) return "";
+    const found = dataActivityList.find(i => i.name.replace(/ /g, "-").toLowerCase() === itemSearch);
+    return found ? found.name : "";
+  }, [dataActivityList, itemSearch]);
+
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center py-10">
+        <div className="animate-spin rounded-full h-6 w-6 border-t-2 border-b-2 border-custPrimary"></div>
+      </div>
+    );
+  }
 
   return (
     <>
-      {
-        loading ? (
-          <>
-            <div className="flex justify-center items-center h-fit py-2">
-              <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-custPrimary"></div>
-            </div>
-          </>
+      {/* Desktop View */}
+      <div className="hidden md:flex flex-col gap-2 text-sm p-3">
+        {dataActivityList.length === 0 ? (
+          <p className="text-gray-500 italic">Data activity not found</p>
         ) : (
-          <>
-            <div className="hidden md:flex flex-col gap-4 text-xs md:text-sm p-3">
-              {
-                dataActivityList && dataActivityList.length == 0 ? (
-                  <p className="text-gray-500">Data activity not found</p>
-                ) :
-                  dataActivityList.map((item, index) => {
-                    const lowerItem = item.name.replace(/ /g, "-").toLowerCase();
+          dataActivityList.map((item, index) => {
+            const lowerItem = item.name.replace(/ /g, "-").toLowerCase();
+            const isActive = itemSearch === lowerItem;
 
-                    return (
-                      <span
-                        // href={`?title=${generateSlugActive}&item=${lowerItem}`}
-                        onClick={() => location.push('/activity?title=' + generateSlugActive + '&item=' + lowerItem)}
-                        className={`cursor-pointer hover:text-gray-500 text-gray-800
-                            ${itemSearch == lowerItem ? "font-semibold underline" : "font-normal"
-                          }
-                        `}
-                        key={index}
-                      >
-                        {item.name}
-                      </span>
-                    );
-                  })}
-            </div>
-            <div className="md:hidden flex gap-2">
-              <select
-                value={selectedItem}
-                className="w-full text-sm sm:text-base p-1 mt-2"
-                onChange={handleChange}
-              >
-                {
-                  dataActivityList && dataActivityList.length == 0 ? (
-                    <option value="" disabled>
-                      Data activity not found
-                    </option>
-                  ) :
-                    dataActivityList.map((item, index) => (
-                      <option
-                        key={index}
-                        value={item.name.replace(/ /g, "-").toLowerCase()}
-                      >
-                        {item.name}
-                      </option>
-                    ))}
-                <option value="" disabled>
-                  Select Activity
-                </option>
-              </select>
+            return (
               <button
-                onClick={
-                  () => location.push('/activity?title=' + generateSlugActive + '&item=' + selectedItem)
-                }
-                className="md:hidden w-fit text-sm sm:text-base py-1 px-3 mt-2 bg-custPrimary text-white"
+                key={item.id || index}
+                onClick={() => handleChangePage(item.name)}
+                className={`text-left px-2 py-1.5 rounded transition-all duration-200
+                  ${isActive
+                    ? "font-semibold text-custPrimary bg-blue-50 border-l-4 border-custPrimary"
+                    : "font-normal text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+                  }
+                `}
               >
-                Go
+                {item.name}
               </button>
-            </div>
-          </>
-        )
-      }
+            );
+          })
+        )}
+      </div>
+
+      {/* Mobile View */}
+      <div className="md:hidden flex gap-2 p-3">
+        <select
+          value={currentSelectedName}
+          onChange={(e) => {
+            // Cari item asli berdasarkan value name
+            handleChangePage(e.target.value);
+          }}
+          className="w-full text-sm p-2 border border-gray-300 rounded focus:outline-custPrimary bg-white"
+        >
+          {dataActivityList.length === 0 ? (
+            <option disabled>Data not found</option>
+          ) : (
+            <>
+              <option value="" disabled>Select Activity</option>
+              {dataActivityList.map((item, index) => (
+                <option key={index} value={item.name}>
+                  {item.name}
+                </option>
+              ))}
+            </>
+          )}
+        </select>
+      </div>
     </>
   );
 };
