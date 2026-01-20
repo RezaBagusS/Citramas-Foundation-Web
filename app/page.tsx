@@ -5,6 +5,8 @@ import About from "./components/section/about";
 import News from "./components/section/news";
 // import Map from "./components/section/map";
 
+export const dynamic = 'force-dynamic'; // <--- Tambahkan baris ini
+
 export default function Home() {
 
   return (
