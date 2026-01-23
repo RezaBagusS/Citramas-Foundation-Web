@@ -14,6 +14,14 @@ const nextConfig = {
         hostname: 'res.cloudinary.com',
         pathname: '**',
       },
+      {
+        protocol: 'https',
+        hostname: '**.cdninstagram.com', // Mengizinkan semua subdomain CDN Instagram
+      },
+      {
+        protocol: 'https',
+        hostname: '**.instagram.com', // Jaga-jaga jika format URL berbeda
+      },
     ],
   },
 };

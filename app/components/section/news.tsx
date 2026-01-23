@@ -13,21 +13,6 @@ interface DataImage {
 }
 
 const News = async () => {
-  // const [dataSlider, setDataSlider] = useState<DataImage[]>([]);
-
-  // useEffect(() => {
-  //   activitySlider()
-  //     .then((res) => {
-  //       if (res.error === false) {
-  //         setDataSlider(res.data || []);
-  //       } else {
-  //         console.log(res.message);
-  //       }
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }, []);
 
   const dataSlider = await activitySlider();
 

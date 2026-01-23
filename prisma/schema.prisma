@@ -52,3 +52,9 @@ model UserAdmin {
   password   String   @db.Text
   created_at DateTime @default(now()) @db.Date
 }
+
+model InstagramPost {
+  id        Int      @id @default(autoincrement())
+  url       String   @db.Text // Gunakan @db.Text agar muat jika URL sangat panjang
+  updatedAt DateTime @updatedAt
+}
