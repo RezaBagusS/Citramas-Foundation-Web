@@ -14,6 +14,7 @@ export interface NewsItem {
   date: Date | string; // Handle kemungkinan string dari API
   note: string | null;
   path: string;
+  image?: string | null;
 }
 
 const Page: React.FC = () => {

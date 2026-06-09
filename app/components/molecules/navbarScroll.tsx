@@ -15,6 +15,10 @@ const dataList = [
     path: "/",
   },
   {
+    title: "About Us",
+    path: "/aboutus",
+  },
+  {
     title: "Activity",
     path: "/activity",
   },
@@ -52,7 +56,7 @@ const NavbarScroll = () => {
     },[]);
 
   return (
-    <div className={`w-full fixed bg-slate-100 z-40 transition-all duration-300
+    <div className={`w-full max-w-[1400px] fixed left-1/2 -translate-x-1/2 bg-slate-100 z-40 transition-all duration-300
         ${pathname == "/" ? scrollY > 120 ? "shadow-md top-0" : "-top-full" : "shadow-md top-0"}
     `}>
       <div className="cust-container flex justify-between py-3">

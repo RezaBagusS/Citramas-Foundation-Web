@@ -12,6 +12,10 @@ const dataList = [
     path: "/",
   },
   {
+    title: "About Us",
+    path: "/aboutus",
+  },
+  {
     title: "Activity",
     path: "/activity",
   },

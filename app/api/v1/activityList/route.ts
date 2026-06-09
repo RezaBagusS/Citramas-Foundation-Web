@@ -5,7 +5,16 @@ import { get } from "https";
 export async function POST(request: Request) {
     try {
 
-        const { active } = await request.json();
+        const body = await request.json();
+        const active = body?.active;
+
+        if (!active || typeof active !== "string") {
+            return NextResponse.json({
+                error: true,
+                message: "Parameter 'active' is required and must be a string",
+                data: []
+            }, { status: 400 });
+        }
 
         const tabActivity = await prisma.activity.findMany({
             select: {

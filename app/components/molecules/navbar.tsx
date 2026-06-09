@@ -14,6 +14,10 @@ const dataList = [
     path: "/",
   },
   {
+    title: "About Us",
+    path: "/aboutus",
+  },
+  {
     title: "Activity",
     path: "/activity",
   },
@@ -36,8 +40,8 @@ const Navbar: FC = () => {
   }
 
   return (
-    <div className="cust-container absolute top-0 left-1/2 -translate-x-1/2 w-full border-b border-custWhite/35">
-      <div className="flex justify-between py-8">
+    <div className="absolute top-0 left-0 w-full border-b border-custWhite/35">
+      <div className="cust-container flex justify-between py-8">
         <Image
           src={logo}
           priority

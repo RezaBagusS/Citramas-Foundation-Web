@@ -1,7 +1,7 @@
 import Image from "next/image";
 import logo from "../../assets/logo.png";
 import { MdHomeWork } from "react-icons/md";
-import { FaPhoneAlt } from "react-icons/fa";
+import { FaPhoneAlt, FaInstagram, FaTiktok } from "react-icons/fa";
 import { IoPhonePortrait } from "react-icons/io5";
 import { MdAttachEmail } from "react-icons/md";
 
@@ -16,6 +16,26 @@ const Footer = () => {
             participates in improving the educational conditions of children in
             Indonesia.
           </p>
+          <div className="flex gap-4 items-center mt-1">
+            <a
+              href="https://www.instagram.com/citramasfoundation?igsh=cGlwa2I5ZHB4Y28w&utm_source=qr"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-400 hover:text-custPrimary transition duration-150 text-2xl"
+              aria-label="Citramas Foundation Instagram"
+            >
+              <FaInstagram />
+            </a>
+            <a
+              href="https://www.tiktok.com/@citramas.foundation?_r=1&_t=ZS-9PfTM6oxgP"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-400 hover:text-custPrimary transition duration-150 text-xl"
+              aria-label="Citramas Foundation TikTok"
+            >
+              <FaTiktok />
+            </a>
+          </div>
         </div>
         <div className="col-span-12 md:col-span-8 flex md:justify-end">
           <div className="lg:pr-20">
@@ -24,13 +44,18 @@ const Footer = () => {
             </h4>
             <ul className="text-gray-500 w-80 flex flex-col gap-3 text-xs sm:text-sm">
               <li className="flex w-full">
-                <div className="w-5 h-5">
+                <div className="w-5 h-5 flex-shrink-0">
                   <MdHomeWork className="inline-block mr-2" />
                 </div>
-                <p>
+                <a
+                  href="https://maps.app.goo.gl/E7NKTt7EBrPwH7477"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:underline hover:text-custPrimary transition-all duration-150"
+                >
                   Jalan Hang Kesturi KM. 4. Komplek Ruko Citranusa Niaga Blok A2
                   No. 1. Kawasan Industri Terpadu Kabil. Batam 29467.
-                </p>
+                </a>
               </li>
               {/* <li>
                 <FaPhoneAlt width={5} className="inline-block mr-2" />

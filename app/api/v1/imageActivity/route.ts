@@ -4,7 +4,16 @@ import prisma from "@/app/libs/prisma";
 export async function POST(request: Request) {
     try {
 
-        const { item } = await request.json();
+        const body = await request.json();
+        const item = body?.item;
+
+        if (!item || typeof item !== "string") {
+            return NextResponse.json({
+                error: true,
+                message: "Parameter 'item' is required and must be a string",
+                data: []
+            }, { status: 400 });
+        }
 
         const getActivityList = await prisma.listActivity.findMany({
             select: {

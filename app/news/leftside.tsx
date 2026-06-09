@@ -49,9 +49,9 @@ const LeftSide = ({ data }: LeftSideProps) => {
         </div>
       )}
 
-      <div className="py-5 flex flex-col gap-4">
+      <div className="py-5 grid grid-cols-1 sm:grid-cols-2 gap-6 items-stretch">
         {displayedData.length === 0 ? (
-          <p className="text-center text-gray-500 py-10 italic">
+          <p className="text-center text-gray-500 py-10 italic col-span-2">
             No news matches &quot;{keyword}&quot;
           </p>
         ) : (
